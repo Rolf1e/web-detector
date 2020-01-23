@@ -15,7 +15,7 @@ public class PatternResolver {
         this.toResolve = toResolve;
     }
 
-    
+
 
 
 }
