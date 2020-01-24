@@ -1,18 +1,16 @@
 package com.rolfie.webdetector.analyse.infra;
 
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
-import org.jsoup.nodes.Attributes;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
-import org.junit.Before;
+import com.rolfie.webdetector.analyse.markup.TextAnalyzer;
+import com.rolfie.webdetector.retriever.infra.WebPageRetriever;
+import org.jsoup.Jsoup;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ImgAnalyzerTest {
 
-    private ImgAnalyzer analyzer;
-
-    @Before
-    public void init() {
+    @Test
+    public void should_get_no_errors() {
         final String goodHtml = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -26,6 +24,17 @@ public class ImgAnalyzerTest {
                 "    </div>\n" +
                 "</body>\n" +
                 "</html>";
+
+        WebPageRetriever pageRetriever = new WebPageRetriever(Jsoup.parse(goodHtml));
+
+        TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingWebSite());
+        analyzer.foundError();
+        Assert.assertEquals(0, analyzer.getErrors());
+    }
+
+    @Test
+    public void should_get_errors() {
+
         final String badHtml = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -46,17 +55,11 @@ public class ImgAnalyzerTest {
                 "</html>";
 
 
-    }
+        WebPageRetriever pageRetriever = new WebPageRetriever(Jsoup.parse(badHtml));
 
+        TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingWebSite());
 
-    @Test
-    public void should_get_no_errors() {
-
-    }
-
-    @Test
-    public void should_get_errors() {
-
+        Assert.assertEquals(2, analyzer.getErrors());
     }
 
 }

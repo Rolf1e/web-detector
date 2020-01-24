@@ -4,7 +4,6 @@ import com.rolfie.webdetector.retriever.infra.UrlHolder;
 import com.rolfie.webdetector.retriever.infra.WebPageRetriever;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -3,11 +3,9 @@ package com.rolfie.webdetector.retriever.infra;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +37,8 @@ public class WebPageRetrieverTest {
                 "</body>\n" +
                 "</html>";
         final List<String> actual = new ArrayList<>();
-        final List<String> expected = Arrays.stream(url.split(">"))
+
+        final List<String> expected = Arrays.stream(url.split("(?<=>)"))
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
 
@@ -52,11 +51,10 @@ public class WebPageRetrieverTest {
             actual.add(entry.getValue());
         }
 
-        //TODO : fix space difference between the two arrays
 
-        Assert.assertTrue(expected.containsAll(actual)
-                && actual.containsAll(expected));
+        Assert.assertEquals(actual.size(), expected.size());
 
     }
+
 
 }

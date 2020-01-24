@@ -1,9 +1,7 @@
 package com.rolfie.webdetector.analyse.infra.pattern.regex;
 
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 public class PatternResolver {
 
