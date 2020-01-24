@@ -1,4 +1,4 @@
-package com.rolfie.webdetector.analyse.infra;
+package com.rolfie.webdetector.analyse.markup;
 
 import org.jsoup.nodes.Element;
 
@@ -6,6 +6,6 @@ import java.util.Map;
 
 public interface TextAnalyzer {
 
-    Map<Integer, Element> found();
+    Map<Integer, String> foundError();
 
 }

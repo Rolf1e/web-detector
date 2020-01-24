@@ -1,8 +1,6 @@
 package com.rolfie.webdetector.retriever.infra;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +11,7 @@ import java.util.Map;
 public class WebPageRetriever {
 
     private final Document document;
-    private final Elements wholeWebSite;
+    private final String wholeWebSite;
 
     @Autowired
     public WebPageRetriever(Document document) {
@@ -21,17 +19,17 @@ public class WebPageRetriever {
         wholeWebSite = retrieveWebSite();
     }
 
-    public Map<Integer, Element> mappingWebSite() {
-        Map<Integer, Element> mappedWebSite = new HashMap<>();
+    public Map<Integer, String> mappingWebSite() {
+        Map<Integer, String> mappedWebSite = new HashMap<>();
         int i = 0;
-        for (Element element : retrieveWebSite()) {
-            mappedWebSite.put(i++, element);
+        for (String element : retrieveWebSite().split(">")) {
+            mappedWebSite.put(i++, element.toLowerCase());
         }
         return mappedWebSite;
     }
 
-    private Elements retrieveWebSite() {
-        return document.getAllElements();
+    private String retrieveWebSite() {
+        return document.html();
     }
 
 }

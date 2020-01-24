@@ -16,7 +16,7 @@ import java.util.Map;
 public class WebRetrieverConfig {
 
     @Bean(name = "onePageMappedRetriever")
-    public Map<Integer, Element> onePageMappedRetriever(WebPageRetriever webPageRetriever) {
+    public Map<Integer, String> onePageMappedRetriever(WebPageRetriever webPageRetriever) {
         return webPageRetriever.mappingWebSite();
     }
 
