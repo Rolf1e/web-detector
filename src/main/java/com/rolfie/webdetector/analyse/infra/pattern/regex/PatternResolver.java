@@ -5,18 +5,18 @@ import java.util.regex.Pattern;
 
 public class PatternResolver {
 
-    public static boolean resolve(String pattern,
-                                  String toResolve) {
+    private final String pattern;
 
+
+    public PatternResolver(String pattern) {
+        this.pattern = pattern;
+    }
+
+    public boolean resolve(String toResolve) {
         final Pattern compiledPattern = Pattern.compile(pattern);
         Matcher matcher = compiledPattern.matcher(toResolve);
         return matcher.matches();
     }
 
-    /**
-     * Hidden constructor
-     */
-    private PatternResolver() {
-        throw new IllegalStateException("Utility class");
-    }
+
 }

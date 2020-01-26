@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Configuration
-public class WebRetrieverConfig {
+public class    WebRetrieverConfig {
 
     @Bean(name = "onePageMappedRetriever")
     public Map<Integer, String> onePageMappedRetriever(WebPageRetriever webPageRetriever) {
