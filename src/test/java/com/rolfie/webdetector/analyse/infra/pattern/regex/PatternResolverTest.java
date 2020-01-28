@@ -9,7 +9,7 @@ public class PatternResolverTest {
     public void should_return_true(){
         String toResolve = "    <img src=\"ImgAnalyzerTest.java\" alt=\"un test\">";
         PatternResolver resolver = new PatternResolver("[\\s.]*<img.*>[\\s.]*");
-        Assert.assertTrue(resolver.resolve(toResolve));
+        Assert.assertTrue(resolver.regexResolve(toResolve));
 
     }
 
@@ -17,7 +17,7 @@ public class PatternResolverTest {
     public void should_return_false(){
         String toResolve = "    <div src=\"ImgAnalyzerTest.java\" alt=\"un test\">";
         PatternResolver resolver = new PatternResolver("[\\s.]*<img.*>[\\s.]*");
-        Assert.assertFalse(resolver.resolve(toResolve));
+        Assert.assertFalse(resolver.regexResolve(toResolve));
 
     }
 

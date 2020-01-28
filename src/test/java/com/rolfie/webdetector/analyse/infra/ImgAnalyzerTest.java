@@ -28,7 +28,7 @@ public class ImgAnalyzerTest {
         WebPageRetriever pageRetriever = new WebPageRetriever(Jsoup.parse(goodHtml));
 
         TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingWebSite());
-        analyzer.foundError();
+        analyzer.foundErrors();
         Assert.assertEquals(0, analyzer.getErrors());
     }
 
@@ -58,7 +58,7 @@ public class ImgAnalyzerTest {
         WebPageRetriever pageRetriever = new WebPageRetriever(Jsoup.parse(badHtml));
 
         TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingWebSite());
-        analyzer.foundError();
+        analyzer.foundErrors();
         Assert.assertEquals(2, analyzer.getErrors());
     }
 

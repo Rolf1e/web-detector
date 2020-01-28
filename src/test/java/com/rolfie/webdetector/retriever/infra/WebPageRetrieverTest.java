@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -51,10 +52,17 @@ public class WebPageRetrieverTest {
             actual.add(entry.getValue());
         }
 
-
         Assert.assertEquals(actual.size(), expected.size());
 
     }
+
+    @Test
+    public void should_get_web_site() throws IOException {
+        final String url = "https://youtube.com";
+        Document document = Jsoup.connect(url).get();
+
+    }
+
 
 
 }

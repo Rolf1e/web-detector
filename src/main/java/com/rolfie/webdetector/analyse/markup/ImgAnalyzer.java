@@ -30,7 +30,7 @@ public class ImgAnalyzer implements TextAnalyzer {
 
         for (Map.Entry<Integer, String> entry : webPage.entrySet()) {
             final String currentMarkup = entry.getValue();
-            if (resolver.resolve(currentMarkup)) {
+            if (resolver.regexResolve(currentMarkup)) {
                 onlyImg.put(entry.getKey(), entry.getValue());
             }
         }
@@ -39,13 +39,13 @@ public class ImgAnalyzer implements TextAnalyzer {
     }
 
     @Override
-    public Map<Integer, String> foundError() {
+    public Map<Integer, String> foundErrors() {
         Map<Integer, String> badElements = new HashMap<>();
         PatternResolver resolver = new PatternResolver(pattern);
 
         for (Map.Entry<Integer, String> entry : getOnlyImg().entrySet()) {
             final String currentElement = entry.getValue();
-            if (resolver.resolve(currentElement)) {
+            if (resolver.regexResolve(currentElement)) {
                 badElements.put(countErrors++, currentElement);
                 log.info("One element is badly coded line :" + entry.getKey());
             }
