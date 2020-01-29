@@ -1,32 +1,29 @@
 package com.rolfie.webdetector.beans;
 
 import com.rolfie.webdetector.retriever.infra.UrlHolder;
-import com.rolfie.webdetector.retriever.infra.WebPageRetriever;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import io.webfolder.cdp.Launcher;
+import io.webfolder.cdp.session.Session;
+import io.webfolder.cdp.session.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.IOException;
-import java.util.Map;
-
 @Configuration
-public class    WebRetrieverConfig {
+public class WebRetrieverConfig {
 
-    @Bean(name = "onePageMappedRetriever")
-    public Map<Integer, String> onePageMappedRetriever(WebPageRetriever webPageRetriever) {
-        return webPageRetriever.mappingWebSite();
+    @Bean(destroyMethod = "close")
+    public Session sessionFactory(Launcher launcher,
+                                  UrlHolder url) {
+        SessionFactory sessionFactory = launcher.launch();
+
+        return sessionFactory.create()
+                .waitDocumentReady()
+                .navigate(url.getUrl());
     }
 
-    @Bean
-    public WebPageRetriever onePageRetriever(Document document) {
-        return new WebPageRetriever(document);
-    }
-
-    @Bean
-    public Document siteRetriever(UrlHolder urlHolder) throws IOException {
-        return Jsoup.connect(urlHolder.getUrl()).get();
+    @Bean(destroyMethod = "kill")
+    public Launcher launcher() {
+        return new Launcher();
     }
 
     @Bean

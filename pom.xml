@@ -88,6 +88,13 @@
             <version>3.2.4</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.webfolder/cdp4j -->
+        <dependency>
+            <groupId>io.webfolder</groupId>
+            <artifactId>cdp4j</artifactId>
+            <version>3.0.15</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,16 +1,19 @@
 package com.rolfie.webdetector.analyse.infra;
 
+import com.rolfie.webdetector.analyse.infra.mock.MockComponent;
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.analyse.markup.TextAnalyzer;
 import com.rolfie.webdetector.retriever.infra.WebPageRetriever;
-import org.jsoup.Jsoup;
+import io.webfolder.cdp.session.Session;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ImgAnalyzerTest {
 
+
     @Test
     public void should_get_no_errors() {
+        Session session = MockComponent.mockGoodSession();
         final String goodHtml = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -25,16 +28,16 @@ public class ImgAnalyzerTest {
                 "</body>\n" +
                 "</html>";
 
-        WebPageRetriever pageRetriever = new WebPageRetriever(Jsoup.parse(goodHtml));
+        WebPageRetriever pageRetriever = new WebPageRetriever(session);
 
-        TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingWebSite());
+        TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingBody());
         analyzer.foundErrors();
         Assert.assertEquals(0, analyzer.getErrors());
     }
 
     @Test
     public void should_get_errors() {
-
+        Session session = MockComponent.mockBadSession();
         final String badHtml = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
@@ -54,10 +57,9 @@ public class ImgAnalyzerTest {
                 "</body>\n" +
                 "</html>";
 
+        WebPageRetriever pageRetriever = new WebPageRetriever(session);
 
-        WebPageRetriever pageRetriever = new WebPageRetriever(Jsoup.parse(badHtml));
-
-        TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingWebSite());
+        TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingBody());
         analyzer.foundErrors();
         Assert.assertEquals(2, analyzer.getErrors());
     }

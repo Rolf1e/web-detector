@@ -1,12 +1,11 @@
 package com.rolfie.webdetector.retriever.infra;
 
+import com.rolfie.webdetector.analyse.infra.mock.MockComponent;
+import io.webfolder.cdp.session.Session;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,37 +15,24 @@ import java.util.stream.Collectors;
 @Slf4j
 public class WebPageRetrieverTest {
 
+    private Session session = MockComponent.mockGoodSession();
 
     @Test
-    public void should_parse_web_site() {
-        final String url = "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Title</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<img src=\"ImgAnalyzerTest.java\" alt=\"\">\n" +
+    public void should_parse_body() {
+        final String url = "<body>\n" +
+                "<img src=\"ImgAnalyzerTest.java\" alt=\"un test\">\n" +
                 "<div>\n" +
-                "    <img src=\"hhhe\" alt=\"un autre test \">\n" +
+                "<img src=\"hhhe\" alt=\"un autre test \">\n" +
                 "</div>\n" +
-                "<div>\n" +
-                "    <p>\n" +
-                "        <img src=\"ImgAnalyzerTest.java\" alt=\"\">\n" +
-                "    </p>\n" +
-                "</div>\n" +
-                "</body>\n" +
-                "</html>";
+                "</body>\n";
         final List<String> actual = new ArrayList<>();
 
         final List<String> expected = Arrays.stream(url.split("(?<=>)"))
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
 
-        Document document = Jsoup.parse(url);
-        WebPageRetriever webPageRetriever = new WebPageRetriever(document);
-        final Map<Integer, String> integerElementMap = webPageRetriever.mappingWebSite();
-
+        WebPageRetriever webPageRetriever = new WebPageRetriever(session);
+        final Map<Integer, String> integerElementMap = webPageRetriever.mappingBody();
 
         for (Map.Entry<Integer, String> entry : integerElementMap.entrySet()) {
             actual.add(entry.getValue());
@@ -57,12 +43,28 @@ public class WebPageRetrieverTest {
     }
 
     @Test
-    public void should_get_web_site() throws IOException {
-        final String url = "https://youtube.com";
-        Document document = Jsoup.connect(url).get();
+    public void should_parse_header() {
+        final String url = "<head>\n" +
+                "<meta charset=\"UTF-8\">\n" +
+                "<title>Title</title>\n" +
+                "</head>\n";
+
+        final List<String> actual = new ArrayList<>();
+
+        final List<String> expected = Arrays.stream(url.split("(?<=>)"))
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
+
+        WebPageRetriever webPageRetriever = new WebPageRetriever(session);
+        final Map<Integer, String> integerElementMap = webPageRetriever.mappingHead();
+
+        for (Map.Entry<Integer, String> entry : integerElementMap.entrySet()) {
+            actual.add(entry.getValue());
+        }
+
+        Assert.assertEquals(actual.size(), expected.size());
 
     }
-
 
 
 }
