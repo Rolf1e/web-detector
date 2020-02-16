@@ -19,5 +19,6 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         this.repository.save(new Company("CUD", "https://www.ville-dunkerque.fr/"));
+        this.repository.save(new Company("Java", "https://www.oracle.com/"));
     }
 }

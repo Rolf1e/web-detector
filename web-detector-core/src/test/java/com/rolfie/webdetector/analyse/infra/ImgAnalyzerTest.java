@@ -14,19 +14,6 @@ public class ImgAnalyzerTest {
     @Test
     public void should_get_no_errors() {
         Session session = MockComponent.mockGoodSession();
-        final String goodHtml = "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Title</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "    <img src=\"ImgAnalyzerTest.java\" alt=\"un test\">\n" +
-                "    <div>\n" +
-                "        <img src=\"hhhe\" alt=\"un autre test \">\n" +
-                "    </div>\n" +
-                "</body>\n" +
-                "</html>";
 
         WebPageRetriever pageRetriever = new WebPageRetriever(session);
 
@@ -38,24 +25,6 @@ public class ImgAnalyzerTest {
     @Test
     public void should_get_errors() {
         Session session = MockComponent.mockBadSession();
-        final String badHtml = "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
-                "<head>\n" +
-                "    <meta charset=\"UTF-8\">\n" +
-                "    <title>Title</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<img src=\"ImgAnalyzerTest.java\" alt=\"\">\n" +
-                "<div>\n" +
-                "    <img src=\"hhhe\" alt=\"un autre test \">\n" +
-                "</div>\n" +
-                "<div>\n" +
-                "    <p>\n" +
-                "        <img src=\"ImgAnalyzerTest.java\" alt=\"\">\n" +
-                "    </p>\n" +
-                "</div>\n" +
-                "</body>\n" +
-                "</html>";
 
         WebPageRetriever pageRetriever = new WebPageRetriever(session);
 
