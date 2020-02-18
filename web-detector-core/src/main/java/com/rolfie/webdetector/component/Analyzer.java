@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Analyzer {
 
-
     private String url;
 
     public Analyzer(String url) {
@@ -19,26 +18,25 @@ public class Analyzer {
 
     public String analyze() {
         log.info("Start text analyze");
-        Session session = sessionFactory(launcher(), url);
-        WebPageRetriever retriever = new WebPageRetriever(session);
-        ImgAnalyzer analyzer = new ImgAnalyzer(retriever.mappingHead());
-        return String.valueOf(analyzer.foundErrors());
+
+        final Launcher launcher = launcher();
+        try(SessionFactory factory = sessionFactory(launcher);
+                Session session = factory.create()){
+            session.navigate(url);
+            session.waitDocumentReady();
+            WebPageRetriever retriever = new WebPageRetriever(session);
+            ImgAnalyzer analyzer = new ImgAnalyzer(retriever.mappingBody());
+            return String.valueOf(analyzer.foundErrors());
+        } finally {
+            launcher.kill();
+        }
     }
 
-    public Session sessionFactory(Launcher launcher,
-                                  String url) {
-        SessionFactory sessionFactory = launcher.launch();
-
-        return sessionFactory.create()
-                .waitDocumentReady()
-                .navigate(url);
+    private SessionFactory sessionFactory(Launcher launcher) {
+        return launcher.launch();
     }
 
-    public Launcher launcher() {
+    private Launcher launcher() {
         return new Launcher();
     }
-
-
-
-
 }
