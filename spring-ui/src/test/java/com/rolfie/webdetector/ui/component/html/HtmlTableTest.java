@@ -12,7 +12,7 @@ public class HtmlTableTest {
 
     @Test
     public void should_build_table() {
-        final String expected = "<table><thead><tr><th>Name</th><th>Nickname</th><th>Age</th></tr></thead><tbody><tr><td>Tigran</td><td>Rolfie</td><td>20</td></tr><tr><td>Emma</td><td>Ephrimes</td><td>21</td></tr></tbody></table>";
+        final String expected = "<table style=\" border: 1px black solid\"><thead><tr><th>Name</th><th>Nickname</th><th>Age</th></tr></thead><tbody><tr style=\"border : 1px black solid\"><td style=\"border : 1px black solid\">Tigran</td><td style=\"border : 1px black solid\">Rolfie</td><td style=\"border : 1px black solid\">20</td></tr><tr style=\"border : 1px black solid\"><td style=\"border : 1px black solid\">Emma</td><td style=\"border : 1px black solid\">Ephrimes</td><td style=\"border : 1px black solid\">21</td></tr></tbody></table>";
 
         List<String> headers = Arrays.asList("Name", "Nickname", "Age");
         String[][] data = new String[2][3];
@@ -31,7 +31,7 @@ public class HtmlTableTest {
 
     @Test
     public void should_build_table_from_map(){
-        final String expected = "<table><thead><tr><th>Line</th><th>Nickname</th></tr></thead><tbody><tr><td>1</td><td>Rolfie</td></tr><tr><td>2</td><td>Ephrimes</td></tr></tbody></table>";
+        final String expected = "<table style=\" border: 1px black solid\"><thead><tr><th>Line</th><th>Nickname</th></tr></thead><tbody><tr style=\"border : 1px black solid\"><td style=\"border : 1px black solid\">1</td><td style=\"border : 1px black solid\">Rolfie</td></tr><tr style=\"border : 1px black solid\"><td style=\"border : 1px black solid\">2</td><td style=\"border : 1px black solid\">Ephrimes</td></tr></tbody></table>";
         List<String> headers = Arrays.asList("Line", "Nickname");
         Map<String, String> data = new HashMap<>();
         data.put("1", "Rolfie");

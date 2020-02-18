@@ -59,7 +59,7 @@ public class HtmlTable {
         int indice = 0;
         for(String element : oldDataFormat.keySet()) {
             data[indice][0] = element;
-            data[indice][1] = oldDataFormat.get(element);
+            data[indice][1] = oldDataFormat.get(element).substring(10);//TODO : Don't forget to remove for prod
             indice++;
         }
         return data;

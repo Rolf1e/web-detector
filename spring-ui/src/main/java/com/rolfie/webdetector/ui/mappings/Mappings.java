@@ -1,6 +1,5 @@
 package com.rolfie.webdetector.ui.mappings;
 
-import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.component.Analyzer;
 import com.rolfie.webdetector.ui.component.IndexForm;
 import com.rolfie.webdetector.ui.component.html.HtmlTable;

@@ -46,7 +46,8 @@ public class ImgAnalyzer implements TextAnalyzer {
         for (Map.Entry<String, String> entry : getOnlyImg().entrySet()) {
             final String currentElement = entry.getValue();
             if (resolver.regexResolve(currentElement)) {
-                badElements.put(String.valueOf(countErrors++), currentElement);
+                badElements.put(String.valueOf(entry.getKey()), currentElement);
+                countErrors++;
                 log.info("One element is badly coded line :" + entry.getKey());
             }
         }
