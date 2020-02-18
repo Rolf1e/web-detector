@@ -7,6 +7,8 @@ import io.webfolder.cdp.session.Session;
 import io.webfolder.cdp.session.SessionFactory;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Map;
+
 @Slf4j
 public class Analyzer {
 
@@ -16,7 +18,7 @@ public class Analyzer {
         this.url = url;
     }
 
-    public String analyze() {
+    public Map<String, String> analyze() {
         log.info("Start text analyze");
 
         final Launcher launcher = launcher();
@@ -24,12 +26,16 @@ public class Analyzer {
                 Session session = factory.create()){
             session.navigate(url);
             session.waitDocumentReady();
-            WebPageRetriever retriever = new WebPageRetriever(session);
-            ImgAnalyzer analyzer = new ImgAnalyzer(retriever.mappingBody());
-            return String.valueOf(analyzer.foundErrors());
+            ImgAnalyzer analyzer = imageAnalyze(session);
+            return analyzer.foundErrors();
         } finally {
             launcher.kill();
         }
+    }
+
+    private ImgAnalyzer imageAnalyze(Session session) {
+        WebPageRetriever retriever = new WebPageRetriever(session);
+        return new ImgAnalyzer(retriever.mappingBody());
     }
 
     private SessionFactory sessionFactory(Launcher launcher) {

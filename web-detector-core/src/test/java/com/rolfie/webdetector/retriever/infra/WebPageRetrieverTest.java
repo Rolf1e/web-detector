@@ -32,9 +32,9 @@ public class WebPageRetrieverTest {
                 .collect(Collectors.toList());
 
         WebPageRetriever webPageRetriever = new WebPageRetriever(session);
-        final Map<Integer, String> integerElementMap = webPageRetriever.mappingBody();
+        final Map<String, String> integerElementMap = webPageRetriever.mappingBody();
 
-        for (Map.Entry<Integer, String> entry : integerElementMap.entrySet()) {
+        for (Map.Entry<String, String> entry : integerElementMap.entrySet()) {
             actual.add(entry.getValue());
         }
 
@@ -56,9 +56,9 @@ public class WebPageRetrieverTest {
                 .collect(Collectors.toList());
 
         WebPageRetriever webPageRetriever = new WebPageRetriever(session);
-        final Map<Integer, String> integerElementMap = webPageRetriever.mappingHead();
+        final Map<String, String> integerElementMap = webPageRetriever.mappingHead();
 
-        for (Map.Entry<Integer, String> entry : integerElementMap.entrySet()) {
+        for (Map.Entry<String, String> entry : integerElementMap.entrySet()) {
             actual.add(entry.getValue());
         }
 

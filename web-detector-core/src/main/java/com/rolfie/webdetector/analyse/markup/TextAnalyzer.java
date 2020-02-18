@@ -4,7 +4,7 @@ import java.util.Map;
 
 public interface TextAnalyzer {
 
-    Map<Integer, String> foundErrors();
+    Map<String, String> foundErrors();
     int getErrors();
 
 }

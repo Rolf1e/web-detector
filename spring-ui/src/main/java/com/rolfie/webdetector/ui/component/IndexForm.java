@@ -1,6 +1,6 @@
 package com.rolfie.webdetector.ui.component;
 
-public class Form {
+public class IndexForm {
 
     public static String getForm() {
         return "<form action=\"/resolve?url=\">" +

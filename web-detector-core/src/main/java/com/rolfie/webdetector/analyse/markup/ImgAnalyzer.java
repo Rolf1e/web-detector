@@ -12,10 +12,10 @@ public class ImgAnalyzer implements TextAnalyzer {
     private static final String pattern = "[\\s.]*<img.*alt=\"\".*>[\\s.]*";
     private static final String imgPattern = "[\\s.]*<img.*>[\\s.]*";
 
-    private final Map<Integer, String> webPage;
+    private final Map<String, String> webPage;
     private int countErrors;
 
-    public ImgAnalyzer(Map<Integer, String> webPage) {
+    public ImgAnalyzer(Map<String, String> webPage) {
         this.webPage = webPage;
         countErrors = 0;
     }
@@ -24,11 +24,11 @@ public class ImgAnalyzer implements TextAnalyzer {
         return countErrors;
     }
 
-    private Map<Integer, String> getOnlyImg() {
-        Map<Integer, String> onlyImg = new HashMap<>();
+    private Map<String, String> getOnlyImg() {
+        Map<String, String> onlyImg = new HashMap<>();
         PatternResolver resolver = new PatternResolver(imgPattern);
 
-        for (Map.Entry<Integer, String> entry : webPage.entrySet()) {
+        for (Map.Entry<String, String> entry : webPage.entrySet()) {
             final String currentMarkup = entry.getValue();
             if (resolver.regexResolve(currentMarkup)) {
                 onlyImg.put(entry.getKey(), entry.getValue());
@@ -39,14 +39,14 @@ public class ImgAnalyzer implements TextAnalyzer {
     }
 
     @Override
-    public Map<Integer, String> foundErrors() {
-        Map<Integer, String> badElements = new HashMap<>();
+    public Map<String, String> foundErrors() {
+        Map<String, String> badElements = new HashMap<>();
         PatternResolver resolver = new PatternResolver(pattern);
 
-        for (Map.Entry<Integer, String> entry : getOnlyImg().entrySet()) {
+        for (Map.Entry<String, String> entry : getOnlyImg().entrySet()) {
             final String currentElement = entry.getValue();
             if (resolver.regexResolve(currentElement)) {
-                badElements.put(countErrors++, currentElement);
+                badElements.put(String.valueOf(countErrors++), currentElement);
                 log.info("One element is badly coded line :" + entry.getKey());
             }
         }

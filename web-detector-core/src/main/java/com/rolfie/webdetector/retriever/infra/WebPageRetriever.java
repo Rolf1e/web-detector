@@ -16,19 +16,19 @@ public class WebPageRetriever {
         this.session = session;
     }
 
-    public Map<Integer, String> mappingBody() {
+    public Map<String, String> mappingBody() {
         return mappingContent(retrieveHtmlContent(bodyMarkUp));
     }
 
-    public Map<Integer, String> mappingHead() {
+    public Map<String, String> mappingHead() {
         return mappingContent(retrieveHtmlContent(headMarkUp));
     }
 
-    private Map<Integer, String> mappingContent(String toMap) {
-        Map<Integer, String> mappedWebSite = new HashMap<>();
+    private Map<String, String> mappingContent(String toMap) {
+        Map<String, String> mappedWebSite = new HashMap<>();
         int i = 0;
         for (String element : toMap.split("(?<=>)")) {
-            mappedWebSite.put(i++, element.toLowerCase());
+            mappedWebSite.put(String.valueOf(i++), element.toLowerCase());
         }
         return mappedWebSite;
     }
