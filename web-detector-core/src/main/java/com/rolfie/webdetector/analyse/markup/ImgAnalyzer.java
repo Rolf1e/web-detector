@@ -1,6 +1,10 @@
 package com.rolfie.webdetector.analyse.markup;
 
 import com.rolfie.webdetector.analyse.infra.pattern.regex.PatternResolver;
+import com.rolfie.webdetector.retriever.infra.html.HtmlLine;
+import com.rolfie.webdetector.retriever.infra.html.Line;
+import com.rolfie.webdetector.retriever.infra.html.LineNumber;
+import com.rolfie.webdetector.retriever.infra.html.Link;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -9,13 +13,15 @@ import java.util.Map;
 @Slf4j
 public class ImgAnalyzer implements TextAnalyzer {
 
-    private static final String pattern = "[\\s.]*<img.*alt=\"\".*>[\\s.]*";
+    private static final String patternWithEmptyAlt = "[\\s.]*<img.*alt=\"\".*>[\\s.]*";
+    private static final String patternAlt = " alt=\"";
+
     private static final String imgPattern = "[\\s.]*<img.*>[\\s.]*";
 
-    private final Map<String, String> webPage;
+    private final Map<LineNumber, Line> webPage;
     private int countErrors;
 
-    public ImgAnalyzer(Map<String, String> webPage) {
+    public ImgAnalyzer(Map<LineNumber, Line> webPage) {
         this.webPage = webPage;
         countErrors = 0;
     }
@@ -24,14 +30,16 @@ public class ImgAnalyzer implements TextAnalyzer {
         return countErrors;
     }
 
-    private Map<String, String> getOnlyImg() {
-        Map<String, String> onlyImg = new HashMap<>();
+    private Map<LineNumber, Line> getOnlyImg() {
+        Map<LineNumber, Line> onlyImg = new HashMap<>();
         PatternResolver resolver = new PatternResolver(imgPattern);
 
-        for (Map.Entry<String, String> entry : webPage.entrySet()) {
-            final String currentMarkup = entry.getValue();
-            if (resolver.regexResolve(currentMarkup)) {
-                onlyImg.put(entry.getKey(), entry.getValue());
+        for (Map.Entry<LineNumber, Line> entry : webPage.entrySet()) {
+
+            final Line currentMarkup = entry.getValue();
+
+            if (resolver.regexResolve(currentMarkup.getValue())) {
+                onlyImg.put(entry.getKey(), Line.create(entry.getValue().getValue()));
             }
         }
 
@@ -39,14 +47,18 @@ public class ImgAnalyzer implements TextAnalyzer {
     }
 
     @Override
-    public Map<String, String> foundErrors() {
-        Map<String, String> badElements = new HashMap<>();
-        PatternResolver resolver = new PatternResolver(pattern);
+    public Map<LineNumber, HtmlLine> foundErrors() {
+        Map<LineNumber, HtmlLine> badElements = new HashMap<>();
+        PatternResolver resolver = new PatternResolver(patternWithEmptyAlt);
 
-        for (Map.Entry<String, String> entry : getOnlyImg().entrySet()) {
-            final String currentElement = entry.getValue();
-            if (resolver.regexResolve(currentElement)) {
-                badElements.put(String.valueOf(entry.getKey()), currentElement);
+        for (Map.Entry<LineNumber, Line> entry : getOnlyImg().entrySet()) {
+
+            final Line currentElement = Line.create(entry.getValue().getValue());
+
+            if (resolver.regexResolve(currentElement.getValue())
+                    || PatternResolver.seek(currentElement.getValue(), patternAlt)) {
+
+                badElements.put(entry.getKey(), Link.extractLink(currentElement.getValue()));
                 countErrors++;
                 log.info("One element is badly coded line :" + entry.getKey());
             }

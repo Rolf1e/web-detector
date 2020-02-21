@@ -1,5 +1,10 @@
 package com.rolfie.webdetector.ui.component.html;
 
+import com.rolfie.webdetector.retriever.infra.html.HtmlLine;
+import com.rolfie.webdetector.retriever.infra.html.Line;
+import com.rolfie.webdetector.retriever.infra.html.LineNumber;
+import com.rolfie.webdetector.retriever.infra.html.Link;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +22,7 @@ public class HtmlTable {
     }
 
     public HtmlTable(List<String> headers,
-                     Map<String, String> data) {
+                     Map<LineNumber, HtmlLine> data) {
 
         this.headers = headers;
         this.data = getDataFromMap(data);
@@ -54,12 +59,14 @@ public class HtmlTable {
         return headers + "</tr></thead>";
     }
 
-    private String[][] getDataFromMap(Map<String, String> oldDataFormat) {
+    private String[][] getDataFromMap(Map<LineNumber, HtmlLine> oldDataFormat) {
         String[][] data = new String[oldDataFormat.size()][2];
         int indice = 0;
-        for(String element : oldDataFormat.keySet()) {
-            data[indice][0] = element;
-            data[indice][1] = oldDataFormat.get(element).substring(10);//TODO : Don't forget to remove for prod
+        for (LineNumber element : oldDataFormat.keySet()) {
+            data[indice][0] = element.getNumber();
+            final HtmlLine link = oldDataFormat
+                    .get(element);
+            data[indice][1] = link.getValue();
             indice++;
         }
         return data;

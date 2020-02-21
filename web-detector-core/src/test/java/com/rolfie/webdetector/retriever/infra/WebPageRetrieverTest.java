@@ -1,6 +1,8 @@
 package com.rolfie.webdetector.retriever.infra;
 
 import com.rolfie.webdetector.analyse.infra.mock.MockComponent;
+import com.rolfie.webdetector.retriever.infra.html.Line;
+import com.rolfie.webdetector.retriever.infra.html.LineNumber;
 import io.webfolder.cdp.session.Session;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -25,16 +27,16 @@ public class WebPageRetrieverTest {
                 "<img src=\"hhhe\" alt=\"un autre test \">\n" +
                 "</div>\n" +
                 "</body>\n";
-        final List<String> actual = new ArrayList<>();
+        final List<Line> actual = new ArrayList<>();
 
-        final List<String> expected = Arrays.stream(url.split("(?<=>)"))
-                .map(String::toLowerCase)
+        final List<Line> expected = Arrays.stream(url.split("(?<=>)"))
+                .map(Line::create)
                 .collect(Collectors.toList());
 
         WebPageRetriever webPageRetriever = new WebPageRetriever(session);
-        final Map<String, String> integerElementMap = webPageRetriever.mappingBody();
+        final Map<LineNumber, Line> integerElementMap = webPageRetriever.mappingBody();
 
-        for (Map.Entry<String, String> entry : integerElementMap.entrySet()) {
+        for (Map.Entry<LineNumber, Line> entry : integerElementMap.entrySet()) {
             actual.add(entry.getValue());
         }
 
@@ -49,16 +51,16 @@ public class WebPageRetrieverTest {
                 "<title>Title</title>\n" +
                 "</head>\n";
 
-        final List<String> actual = new ArrayList<>();
+        final List<Line> actual = new ArrayList<>();
 
-        final List<String> expected = Arrays.stream(url.split("(?<=>)"))
-                .map(String::toLowerCase)
+        final List<Line> expected = Arrays.stream(url.split("(?<=>)"))
+                .map(Line::create)
                 .collect(Collectors.toList());
 
         WebPageRetriever webPageRetriever = new WebPageRetriever(session);
-        final Map<String, String> integerElementMap = webPageRetriever.mappingHead();
+        final Map<LineNumber, Line> integerElementMap = webPageRetriever.mappingHead();
 
-        for (Map.Entry<String, String> entry : integerElementMap.entrySet()) {
+        for (Map.Entry<LineNumber, Line> entry : integerElementMap.entrySet()) {
             actual.add(entry.getValue());
         }
 

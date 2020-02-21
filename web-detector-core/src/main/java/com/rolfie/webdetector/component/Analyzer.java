@@ -2,6 +2,9 @@ package com.rolfie.webdetector.component;
 
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.retriever.infra.WebPageRetriever;
+import com.rolfie.webdetector.retriever.infra.html.HtmlLine;
+import com.rolfie.webdetector.retriever.infra.html.Line;
+import com.rolfie.webdetector.retriever.infra.html.LineNumber;
 import io.webfolder.cdp.Launcher;
 import io.webfolder.cdp.session.Session;
 import io.webfolder.cdp.session.SessionFactory;
@@ -18,7 +21,7 @@ public class Analyzer {
         this.url = url;
     }
 
-    public Map<String, String> analyze() {
+    public Map<LineNumber, HtmlLine> analyze() {
         log.info("Start text analyze");
 
         final Launcher launcher = launcher();

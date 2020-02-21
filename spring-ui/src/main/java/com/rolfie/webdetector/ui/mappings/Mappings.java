@@ -18,7 +18,7 @@ public class Mappings {
     }
 
     @GetMapping("/resolve")
-    public String resolver(@RequestParam(value = "value", defaultValue = "http://www.ville-dunkerque.fr/") String url) {
+    public String resolver(@RequestParam(value = "value", defaultValue = "https://www.pictoaccess.fr/") String url) {
         Analyzer analyzer = new Analyzer(url);
         HtmlTable htmlTable = new HtmlTable(Arrays.asList("Line", "Link"), analyzer.analyze());
         return htmlTable.getToHtmlTable();
