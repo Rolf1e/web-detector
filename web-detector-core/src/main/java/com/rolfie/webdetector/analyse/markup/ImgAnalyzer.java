@@ -41,7 +41,7 @@ public class ImgAnalyzer implements TextAnalyzer {
 
             final String value = currentElement.getValue();
             if (resolver.regexResolve(value)
-                    || PatternResolver.seek(value, patternAlt)) {
+                    || !PatternResolver.seek(value, patternAlt)) {
 
                 final LineNumber key = entry.getKey();
                 badElements.put(key, Link.extractLink(value));
