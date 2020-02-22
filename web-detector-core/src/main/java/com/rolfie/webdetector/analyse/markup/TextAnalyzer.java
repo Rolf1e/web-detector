@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface TextAnalyzer {
 
-    Map<LineNumber, HtmlLine> foundErrors();
-    int getErrors();
+    Map<LineNumber, HtmlLine> found();
+    int numberFound();
 
 }

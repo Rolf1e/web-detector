@@ -26,12 +26,12 @@ public class ImgAnalyzer implements TextAnalyzer {
         countErrors = 0;
     }
 
-    public int getErrors() {
+    public int numberFound() {
         return countErrors;
     }
 
     @Override
-    public Map<LineNumber, HtmlLine> foundErrors() {
+    public Map<LineNumber, HtmlLine> found() {
         Map<LineNumber, HtmlLine> badElements = new HashMap<>();
         PatternResolver resolver = new PatternResolver(patternWithEmptyAlt);
 

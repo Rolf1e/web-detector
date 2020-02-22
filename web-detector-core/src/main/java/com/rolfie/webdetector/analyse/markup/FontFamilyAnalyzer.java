@@ -9,12 +9,12 @@ public class FontFamilyAnalyzer implements TextAnalyzer {
 
 
     @Override
-    public Map<LineNumber, HtmlLine> foundErrors() {
+    public Map<LineNumber, HtmlLine> found() {
         return null;
     }
 
     @Override
-    public int getErrors() {
+    public int numberFound() {
         return 0;
     }
 }

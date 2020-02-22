@@ -3,7 +3,6 @@ package com.rolfie.webdetector.component;
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.retriever.infra.WebPageRetriever;
 import com.rolfie.webdetector.retriever.infra.html.HtmlLine;
-import com.rolfie.webdetector.retriever.infra.html.Line;
 import com.rolfie.webdetector.retriever.infra.html.LineNumber;
 import io.webfolder.cdp.Launcher;
 import io.webfolder.cdp.session.Session;
@@ -30,7 +29,7 @@ public class Analyzer {
             session.navigate(url);
             session.waitDocumentReady();
             ImgAnalyzer analyzer = imageAnalyze(session);
-            return analyzer.foundErrors();
+            return analyzer.found();
         } finally {
             launcher.kill();
         }

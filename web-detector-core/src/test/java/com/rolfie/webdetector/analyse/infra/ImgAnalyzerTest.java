@@ -18,8 +18,8 @@ public class ImgAnalyzerTest {
         WebPageRetriever pageRetriever = new WebPageRetriever(session);
 
         TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingBody());
-        analyzer.foundErrors();
-        Assert.assertEquals(0, analyzer.getErrors());
+        analyzer.found();
+        Assert.assertEquals(0, analyzer.numberFound());
     }
 
     @Test
@@ -29,8 +29,8 @@ public class ImgAnalyzerTest {
         WebPageRetriever pageRetriever = new WebPageRetriever(session);
 
         TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingBody());
-        analyzer.foundErrors();
-        Assert.assertEquals(2, analyzer.getErrors());
+        analyzer.found();
+        Assert.assertEquals(2, analyzer.numberFound());
     }
 
 }
