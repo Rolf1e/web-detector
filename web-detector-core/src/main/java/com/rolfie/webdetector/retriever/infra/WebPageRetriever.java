@@ -9,12 +9,21 @@ import java.util.Map;
 
 public class WebPageRetriever {
 
+    private static WebPageRetriever instance = null;
+
     private static final String bodyMarkUp = "body";
     private static final String headMarkUp = "head";
 
     private final Session session;
 
-    public WebPageRetriever(Session session) {
+    public static WebPageRetriever getInstance(Session session) {
+        if(instance == null) {
+            instance = new WebPageRetriever(session);
+        }
+        return instance;
+    }
+
+    private WebPageRetriever(Session session) {
         this.session = session;
     }
 
@@ -41,5 +50,4 @@ public class WebPageRetriever {
     private String retrieveHtmlContent(String htmlMarkUp) {
         return session.getOuterHtml(htmlMarkUp);
     }
-
 }

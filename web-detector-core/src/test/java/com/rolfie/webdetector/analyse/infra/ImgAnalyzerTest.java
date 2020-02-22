@@ -15,7 +15,7 @@ public class ImgAnalyzerTest {
     public void should_get_no_errors() {
         Session session = MockComponent.mockGoodSession();
 
-        WebPageRetriever pageRetriever = new WebPageRetriever(session);
+        WebPageRetriever pageRetriever = WebPageRetriever.getInstance(session);
 
         TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingBody());
         analyzer.found();
@@ -26,7 +26,7 @@ public class ImgAnalyzerTest {
     public void should_get_errors() {
         Session session = MockComponent.mockBadSession();
 
-        WebPageRetriever pageRetriever = new WebPageRetriever(session);
+        WebPageRetriever pageRetriever = WebPageRetriever.getInstance(session);
 
         TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingBody());
         analyzer.found();

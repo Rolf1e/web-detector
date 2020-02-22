@@ -36,7 +36,7 @@ public class Analyzer {
     }
 
     private ImgAnalyzer imageAnalyze(Session session) {
-        WebPageRetriever retriever = new WebPageRetriever(session);
+        WebPageRetriever retriever = WebPageRetriever.getInstance(session);
         return new ImgAnalyzer(retriever.mappingBody());
     }
 

@@ -33,7 +33,7 @@ public class WebPageRetrieverTest {
                 .map(Line::create)
                 .collect(Collectors.toList());
 
-        WebPageRetriever webPageRetriever = new WebPageRetriever(session);
+        WebPageRetriever webPageRetriever = WebPageRetriever.getInstance(session);
         final Map<LineNumber, Line> integerElementMap = webPageRetriever.mappingBody();
 
         for (Map.Entry<LineNumber, Line> entry : integerElementMap.entrySet()) {
@@ -57,7 +57,7 @@ public class WebPageRetrieverTest {
                 .map(Line::create)
                 .collect(Collectors.toList());
 
-        WebPageRetriever webPageRetriever = new WebPageRetriever(session);
+        WebPageRetriever webPageRetriever = WebPageRetriever.getInstance(session);
         final Map<LineNumber, Line> integerElementMap = webPageRetriever.mappingHead();
 
         for (Map.Entry<LineNumber, Line> entry : integerElementMap.entrySet()) {

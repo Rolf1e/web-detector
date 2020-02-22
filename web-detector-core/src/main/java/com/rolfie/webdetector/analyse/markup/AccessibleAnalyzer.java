@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class AccessibleAnalyzer implements TextAnalyzer {
 
+    private static String accessiblePattern = "accessibilit[eé]";
+
 
     @Override
     public Map<LineNumber, HtmlLine> found() {
