@@ -41,6 +41,9 @@ public class MockComponent {
                         "    <p>\n" +
                         "        <img src=\"ImgAnalyzerTest.java\" alt=\"\">\n" +
                         "    </p>\n" +
+                        "    <p>\n" +
+                        "        <img src=\"ImgAnalyzerTest.java\" >\n" +
+                        "    </p>\n" +
                         "</div>\n" +
                         "</body>\n");
 

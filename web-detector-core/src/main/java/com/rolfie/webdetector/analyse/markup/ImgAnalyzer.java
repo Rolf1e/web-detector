@@ -39,12 +39,14 @@ public class ImgAnalyzer implements TextAnalyzer {
 
             final Line currentElement = Line.create(entry.getValue().getValue());
 
-            if (resolver.regexResolve(currentElement.getValue())
-                    || PatternResolver.seek(currentElement.getValue(), patternAlt)) {
+            final String value = currentElement.getValue();
+            if (resolver.regexResolve(value)
+                    || PatternResolver.seek(value, patternAlt)) {
 
-                badElements.put(entry.getKey(), Link.extractLink(currentElement.getValue()));
+                final LineNumber key = entry.getKey();
+                badElements.put(key, Link.extractLink(value));
                 countErrors++;
-                log.info("One element is badly coded line :" + entry.getKey());
+                log.info("One element is badly coded line :" + key.getNumber());
             }
         }
 
