@@ -30,7 +30,7 @@ public class ImgAnalyzerTest {
 
         TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingBody());
         analyzer.foundErrors();
-        Assert.assertEquals(2, analyzer.getErrors());
+        Assert.assertEquals(3, analyzer.getErrors());
     }
 
 }
