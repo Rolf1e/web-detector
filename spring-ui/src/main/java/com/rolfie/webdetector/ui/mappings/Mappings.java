@@ -3,6 +3,7 @@ package com.rolfie.webdetector.ui.mappings;
 import com.rolfie.webdetector.component.Analyzer;
 import com.rolfie.webdetector.ui.component.IndexForm;
 import com.rolfie.webdetector.ui.component.html.HtmlTable;
+import com.rolfie.webdetector.ui.component.response.json.JsonResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,4 +25,8 @@ public class Mappings {
         return htmlTable.getToHtmlTable();
     }
 
+    @GetMapping("/front")
+    public String front(@RequestParam(value = "value", defaultValue = "https://www.pictoaccess.fr/") String url) {
+        return JsonResponse.getJson();
+    }
 }
