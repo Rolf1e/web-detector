@@ -62,8 +62,7 @@ public class PatternResolver {
         return Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
     }
 
-    public class RegexException extends Exception {
-
+    public static class RegexException extends Exception {
 
         public RegexException() {
             super();

@@ -3,12 +3,10 @@ package com.rolfie.webdetector.component;
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.analyse.markup.TextAnalyzer;
 import com.rolfie.webdetector.retriever.JsoupRetriever;
-import com.rolfie.webdetector.retriever.WebFolderRetriever;
 import com.rolfie.webdetector.retriever.WebRetriever;
 import com.rolfie.webdetector.retriever.infra.html.HtmlLine;
 import com.rolfie.webdetector.retriever.infra.html.LineNumber;
 import io.webfolder.cdp.Launcher;
-import io.webfolder.cdp.session.Session;
 import io.webfolder.cdp.session.SessionFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -20,7 +18,7 @@ import java.util.Map;
 @Slf4j
 public class Analyzer {
 
-    private String url;
+    private final String url;
 
     public Analyzer(String url) {
         this.url = url;
