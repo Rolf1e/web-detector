@@ -22,7 +22,7 @@ public class JsonResponse {
 
     public String getJson() {
         return "{"
-                + "\"uri\" : \"" + getUri() + "\" ,"
+                + "\"uri\":\"" + getUri() + "\","
                 + getJsonBody()
                 + "}";
     }
@@ -33,8 +33,8 @@ public class JsonResponse {
 
 
     public String getJsonBody() {
-        StringBuilder body = new StringBuilder("\"anomalie\" : {");
-        body.append("\"alts\" : {");
+        StringBuilder body = new StringBuilder("\"anomalie\":{");
+        body.append("\"alts\":{");
         for (String[] column : data) {
             body.append("\"")
                     .append(column[0])
