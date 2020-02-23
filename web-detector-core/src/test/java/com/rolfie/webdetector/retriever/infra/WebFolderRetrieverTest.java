@@ -1,6 +1,8 @@
 package com.rolfie.webdetector.retriever.infra;
 
 import com.rolfie.webdetector.analyse.infra.mock.MockComponent;
+import com.rolfie.webdetector.retriever.WebFolderRetriever;
+import com.rolfie.webdetector.retriever.WebRetriever;
 import com.rolfie.webdetector.retriever.infra.html.Line;
 import com.rolfie.webdetector.retriever.infra.html.LineNumber;
 import io.webfolder.cdp.session.Session;
@@ -15,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class WebPageRetrieverTest {
+public class WebFolderRetrieverTest {
 
     private Session session = MockComponent.mockGoodSession();
 
@@ -33,8 +35,8 @@ public class WebPageRetrieverTest {
                 .map(Line::create)
                 .collect(Collectors.toList());
 
-        WebPageRetriever webPageRetriever = WebPageRetriever.getInstance(session);
-        final Map<LineNumber, Line> integerElementMap = webPageRetriever.mappingBody();
+        WebRetriever webFolderRetriever = WebFolderRetriever.getInstance(session);
+        final Map<LineNumber, Line> integerElementMap = webFolderRetriever.mappingBody();
 
         for (Map.Entry<LineNumber, Line> entry : integerElementMap.entrySet()) {
             actual.add(entry.getValue());
@@ -57,8 +59,8 @@ public class WebPageRetrieverTest {
                 .map(Line::create)
                 .collect(Collectors.toList());
 
-        WebPageRetriever webPageRetriever = WebPageRetriever.getInstance(session);
-        final Map<LineNumber, Line> integerElementMap = webPageRetriever.mappingHead();
+        WebRetriever webFolderRetriever = WebFolderRetriever.getInstance(session);
+        final Map<LineNumber, Line> integerElementMap = webFolderRetriever.mappingHead();
 
         for (Map.Entry<LineNumber, Line> entry : integerElementMap.entrySet()) {
             actual.add(entry.getValue());

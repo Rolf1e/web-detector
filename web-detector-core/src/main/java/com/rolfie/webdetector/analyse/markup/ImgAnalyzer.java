@@ -16,7 +16,7 @@ public class ImgAnalyzer implements TextAnalyzer {
     private static final String patternWithEmptyAlt = "[\\s.]*<img.*alt=\"\".*>[\\s.]*";
     private static final String patternAlt = " alt=\"";
 
-    private static final String imgPattern = "[\\s.]*<img.*>[\\s.]*";
+    private static final String imgPattern = "[\\s\\w.]*<img.*>[\\s\\w.]*";
 
     private final Map<LineNumber, Line> webPage;
     private int countErrors;
