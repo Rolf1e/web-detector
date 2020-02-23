@@ -57,14 +57,11 @@ public class ImgAnalyzer implements TextAnalyzer {
         Map<LineNumber, Line> onlyImg = new HashMap<>();
         PatternResolver resolver = new PatternResolver(imgPattern);
 
-        for (Map.Entry<LineNumber, Line> entry : webPage.entrySet()) {
-
-            final Line currentMarkup = entry.getValue();
-
+        webPage.forEach((key, currentMarkup) -> {
             if (resolver.regexResolve(currentMarkup.getValue())) {
-                onlyImg.put(entry.getKey(), Line.create(entry.getValue().getValue()));
+                onlyImg.put(key, Line.create(currentMarkup.getValue()));
             }
-        }
+        });
 
         return onlyImg;
     }
