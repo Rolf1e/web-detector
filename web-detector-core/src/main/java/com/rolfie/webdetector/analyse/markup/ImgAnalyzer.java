@@ -30,24 +30,8 @@ public class ImgAnalyzer implements TextAnalyzer {
         return countErrors;
     }
 
-    private Map<LineNumber, Line> getOnlyImg() {
-        Map<LineNumber, Line> onlyImg = new HashMap<>();
-        PatternResolver resolver = new PatternResolver(imgPattern);
-
-        for (Map.Entry<LineNumber, Line> entry : webPage.entrySet()) {
-
-            final Line currentMarkup = entry.getValue();
-
-            if (resolver.regexResolve(currentMarkup.getValue())) {
-                onlyImg.put(entry.getKey(), Line.create(entry.getValue().getValue()));
-            }
-        }
-
-        return onlyImg;
-    }
-
     @Override
-    public Map<LineNumber, HtmlLine> foundErrors() {
+    public Map<LineNumber, HtmlLine> found() {
         Map<LineNumber, HtmlLine> badElements = new HashMap<>();
         PatternResolver resolver = new PatternResolver(patternWithEmptyAlt);
 
