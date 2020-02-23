@@ -23,9 +23,11 @@ public class JobHandler {
         List<Job> toDo = new ArrayList<>();
 
         for (Job job : jobs) {
-            if (job.isActive()) {
+            if (job.isActive() && !toDo.contains(job)) {
                 toDo.add(job);
+                continue;
             }
+            log.warn("Job {} is either already in the list or not active", job.getName());
         }
 
         return toDo;
