@@ -1,37 +1,62 @@
 package com.rolfie.webdetector.ui.component.response.json;
 
+import com.rolfie.webdetector.component.Analyzer;
 import com.rolfie.webdetector.retriever.infra.UrlHolder;
-import com.rolfie.webdetector.ui.component.job.JobHandler;
+import com.rolfie.webdetector.ui.component.job.Job;
+import com.rolfie.webdetector.ui.dto.Line;
+import com.rolfie.webdetector.ui.dto.Response;
+import lombok.extern.slf4j.Slf4j;
 
-public class FinalResponse implements JsonResponse {
+import java.io.IOException;
+import java.util.List;
 
-    private JobHandler handler;
+@Slf4j
+public class FinalResponse {
 
-    public FinalResponse(JobHandler handler) {
-        this.handler = handler;
+    private Analyzer analyzer;
+    private Response response;
+    private List<Job> jobs;
+
+    public FinalResponse(List<Job> jobs) {
+        analyzer = new Analyzer(getUri());
+        response = new Response();
+        this.jobs = jobs;
     }
 
-    @Override
-    public String getJson() {
-        return "\"uri\":\"" + getUri() + "\"{"
-                + getJsonBody()
-                + "}";
-    }
-
-    public String getJsonBody() {
-        StringBuilder body = new StringBuilder();
-
-        for (JsonResponse response : handler.getJobsToDo()) {
-            body.append(response.getJson())
-                    .append(",");
+    public Response getJson() {
+        response.setUri(getUri());
+        for(Job job : jobs) {
+            jobResolver(job);
         }
-
-        return body.toString();
+        return response;
     }
 
 
     private String getUri() {
         return UrlHolder.getInstance().getUrl();
     }
+
+
+    private void jobResolver(Job job) {
+
+        switch (job.getName()) {
+            case "alt":
+                response.setAlts(getAlts());
+                break;
+            default:
+                throw new IllegalStateException("No job selected");
+        }
+    }
+
+    private List<Line> getAlts() {
+        try {
+            return new AltResponse(analyzer.imgAnalyze())
+                    .getJson();
+        } catch (IOException e) {
+            log.error("Can not get Data for alt job ", e);
+            return null;
+        }
+    }
+
 
 }

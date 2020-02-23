@@ -19,12 +19,12 @@ public class JobHandler {
         this.jobs = jobs;
     }
 
-    public List<JsonResponse> getJobsToDo() {
-        List<JsonResponse> toDo = new ArrayList<>();
+    public List<Job> getJobsToDo() {
+        List<Job> toDo = new ArrayList<>();
 
         for (Job job : jobs) {
             if (job.isActive()) {
-                toDo.add(jobResolver(job));
+                toDo.add(job);
             }
         }
 

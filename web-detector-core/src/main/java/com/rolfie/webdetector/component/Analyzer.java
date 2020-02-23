@@ -24,21 +24,6 @@ public class Analyzer {
         this.url = url;
     }
 
-//    public Map<LineNumber, HtmlLine> analyze() {
-//        log.info("Start text analyze");
-//
-//        final Launcher launcher = launcher();
-//        try (SessionFactory factory = sessionFactory(launcher);
-//             Session session = factory.create()) {
-//            session.navigate(url);
-//            session.waitDocumentReady();
-//            TextAnalyzer analyzer = imageAnalyze(session);
-//            return analyzer.found();
-//        } finally {
-//            launcher.kill();
-//        }
-//    }
-
     public Map<LineNumber, HtmlLine> imgAnalyze() throws IOException {
         log.info("Start image analyze");
 
