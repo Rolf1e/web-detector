@@ -42,6 +42,7 @@ public class JsonResponse {
                     .append(escapeCharacters(column[1]))
                     .append("\",");
         }
+        body.deleteCharAt(body.length()-1);
         return body.append("}}").toString();
     }
 
@@ -56,7 +57,7 @@ public class JsonResponse {
     private String escape(char c) {
         switch (c) {
             case '"':
-                return "\\\"";
+                return "";
             default:
                 return String.valueOf(c);
         }
