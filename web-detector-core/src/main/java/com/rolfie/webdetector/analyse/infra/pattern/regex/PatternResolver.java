@@ -6,19 +6,28 @@ import java.util.regex.Pattern;
 public class PatternResolver {
 
     private final String pattern;
+    private Boolean caseSensitive;
 
     public PatternResolver(String pattern) {
         this.pattern = pattern;
+        this.caseSensitive = true;
+    }
+
+    public PatternResolver(String pattern,
+                           Boolean caseSensitive) {
+        this.pattern = pattern;
+        this.caseSensitive = caseSensitive;
     }
 
     public boolean regexResolve(String toResolve) {
-        final Pattern compiledPattern = Pattern.compile(pattern);
+        Pattern compiledPattern;
+        compiledPattern = getCaseSetting();
         Matcher matcher = compiledPattern.matcher(toResolve);
         return matcher.matches();
     }
 
     public String extractContent(String toResolve) throws RegexException {
-        final Pattern compliedPattern = Pattern.compile(pattern);
+        final Pattern compliedPattern = getCaseSetting();
         Matcher matcher = compliedPattern.matcher(toResolve);
         if (matcher.find()) {
             return matcher.group(0);
@@ -46,7 +55,14 @@ public class PatternResolver {
                 .find();
     }
 
-    public class RegexException extends Exception {
+    private Pattern getCaseSetting() {
+        if (caseSensitive) {
+            return Pattern.compile(pattern);
+        }
+        return Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+    }
+
+    public static class RegexException extends Exception {
 
         public RegexException() {
             super();

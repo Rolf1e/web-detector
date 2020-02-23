@@ -5,9 +5,9 @@ import com.rolfie.webdetector.retriever.infra.html.LineNumber;
 
 import java.util.Map;
 
-public class TextLengthAnalyzer implements TextAnalyzer {
+public class AccessibleAnalyzer implements TextAnalyzer {
 
-    private final static String pPattern = "[\\s.]*<img.*>[\\s.]*</p>[\\s.]*";
+    private static String accessiblePattern = "accessibilit[eé]";
 
 
     @Override

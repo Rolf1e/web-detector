@@ -1,0 +1,12 @@
+{
+  "link": "url web page",
+  "errors": {
+    "alts": {
+      "146": "ligne",
+      "153": "ligne2"
+    },
+    "police" : {
+      "12": "ligne3"
+    }
+  }
+}

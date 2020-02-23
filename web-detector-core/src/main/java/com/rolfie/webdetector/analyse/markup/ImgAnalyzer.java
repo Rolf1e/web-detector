@@ -16,7 +16,7 @@ public class ImgAnalyzer implements TextAnalyzer {
     private static final String patternWithEmptyAlt = "[\\s.]*<img.*alt=\"\".*>[\\s.]*";
     private static final String patternAlt = " alt=\"";
 
-    private static final String imgPattern = "[\\s.]*<img.*>[\\s.]*";
+    private static final String imgPattern = "[\\s\\w.]*<img.*>[\\s\\w.]*";
 
     private final Map<LineNumber, Line> webPage;
     private int countErrors;
@@ -26,8 +26,31 @@ public class ImgAnalyzer implements TextAnalyzer {
         countErrors = 0;
     }
 
-    public int getErrors() {
+    public int numberFound() {
         return countErrors;
+    }
+
+    @Override
+    public Map<LineNumber, HtmlLine> found() {
+        Map<LineNumber, HtmlLine> badElements = new HashMap<>();
+        PatternResolver resolver = new PatternResolver(patternWithEmptyAlt);
+
+        for (Map.Entry<LineNumber, Line> entry : getOnlyImg().entrySet()) {
+
+            final Line currentElement = Line.create(entry.getValue().getValue());
+
+            final String value = currentElement.getValue();
+            if (resolver.regexResolve(value)
+                    || !PatternResolver.seek(value, patternAlt)) {
+
+                final LineNumber key = entry.getKey();
+                badElements.put(key, Link.extractLink(value));
+                countErrors++;
+                log.info("One element is badly coded line :" + key.getNumber());
+            }
+        }
+
+        return badElements;
     }
 
     private Map<LineNumber, Line> getOnlyImg() {
@@ -44,29 +67,6 @@ public class ImgAnalyzer implements TextAnalyzer {
         }
 
         return onlyImg;
-    }
-
-    @Override
-    public Map<LineNumber, HtmlLine> foundErrors() {
-        Map<LineNumber, HtmlLine> badElements = new HashMap<>();
-        PatternResolver resolver = new PatternResolver(patternWithEmptyAlt);
-
-        for (Map.Entry<LineNumber, Line> entry : getOnlyImg().entrySet()) {
-
-            final Line currentElement = Line.create(entry.getValue().getValue());
-
-            final String value = currentElement.getValue();
-            if (resolver.regexResolve(value)
-                    || PatternResolver.seek(value, patternAlt)) {
-
-                final LineNumber key = entry.getKey();
-                badElements.put(key, Link.extractLink(value));
-                countErrors++;
-                log.info("One element is badly coded line :" + key.getNumber());
-            }
-        }
-
-        return badElements;
     }
 
 
