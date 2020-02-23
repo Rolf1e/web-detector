@@ -10,7 +10,6 @@ import java.util.Map;
 public class AltResponse extends JsonResponseImpl {
 
     public AltResponse(Map<LineNumber, HtmlLine> data) {
-
         super(data, "alts");
     }
 

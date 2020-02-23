@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.util.Map;
 
 @Slf4j
-public class Analyzer {
+public class AnalyzerHandler {
 
     private final String url;
 
-    public Analyzer(String url) {
+    public AnalyzerHandler(String url) {
         this.url = url;
     }
 
