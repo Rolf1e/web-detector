@@ -2,13 +2,18 @@ package com.rolfie.webdetector.ui.component.response.json;
 
 import com.rolfie.webdetector.retriever.infra.html.HtmlLine;
 import com.rolfie.webdetector.retriever.infra.html.LineNumber;
+import com.rolfie.webdetector.ui.dto.Line;
+import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public abstract class JsonResponseImpl implements JsonResponse {
 
     //String[row][column]
     protected String[][] data;
+    @Getter
     protected String anomalyType;
 
     protected JsonResponseImpl(String[][] data,
@@ -25,19 +30,20 @@ public abstract class JsonResponseImpl implements JsonResponse {
         this.anomalyType = anomalyType;
     }
 
-    protected String getJsonBody() {
-        StringBuilder body = new StringBuilder();
+    protected List<Line> getJsonBody() {
+        List<Line> body = new ArrayList<>();
 
-        for (String[] column : data) {
-            body.append("\"")
-                    .append(escapeCharacters(column[0]))
-                    .append("\":\"")
-                    .append(escapeCharacters(column[1]))
-                    .append("\",");
+        for(String[] column : data) {
+            body.add(create(column[0], column[1]));
         }
-        body.deleteCharAt(body.length() - 1);//remove last comma
 
-        return body.toString();
+        return body;
+    }
+
+    private Line create(String number,
+                        String url) {
+
+        return new Line(number, url);
     }
 
     private String escapeCharacters(String toEscape) {

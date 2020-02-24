@@ -9,7 +9,7 @@ import io.webfolder.cdp.session.Session;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ImgAnalyzerTest {
+public class ImgAnalyzerHandlerTest {
 
 
     @Test

@@ -16,28 +16,13 @@ import java.io.IOException;
 import java.util.Map;
 
 @Slf4j
-public class Analyzer {
+public class AnalyzerHandler {
 
     private final String url;
 
-    public Analyzer(String url) {
+    public AnalyzerHandler(String url) {
         this.url = url;
     }
-
-//    public Map<LineNumber, HtmlLine> analyze() {
-//        log.info("Start text analyze");
-//
-//        final Launcher launcher = launcher();
-//        try (SessionFactory factory = sessionFactory(launcher);
-//             Session session = factory.create()) {
-//            session.navigate(url);
-//            session.waitDocumentReady();
-//            TextAnalyzer analyzer = imageAnalyze(session);
-//            return analyzer.found();
-//        } finally {
-//            launcher.kill();
-//        }
-//    }
 
     public Map<LineNumber, HtmlLine> imgAnalyze() throws IOException {
         log.info("Start image analyze");
