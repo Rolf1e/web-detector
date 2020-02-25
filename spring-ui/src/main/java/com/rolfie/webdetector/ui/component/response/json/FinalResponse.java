@@ -2,7 +2,7 @@ package com.rolfie.webdetector.ui.component.response.json;
 
 import com.rolfie.webdetector.component.AnalyzerHandler;
 import com.rolfie.webdetector.retriever.infra.UrlHolder;
-import com.rolfie.webdetector.ui.component.job.Job;
+import com.rolfie.webdetector.ui.dto.Job;
 import com.rolfie.webdetector.ui.dto.Line;
 import com.rolfie.webdetector.ui.dto.Response;
 import lombok.extern.slf4j.Slf4j;

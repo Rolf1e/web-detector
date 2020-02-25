@@ -50,12 +50,12 @@ public class AnalyzerHandler {
     }
 
     private TextAnalyzer imageAnalyze(Document document) {
-        WebRetriever retriever = JsoupRetriever.getInstance(document);
+        WebRetriever retriever = new JsoupRetriever(document);
         return new ImgAnalyzer(retriever.mappingBody());
     }
 
     private TextAnalyzer accessibiliteWordAnalyze(Document document) throws IOException {
-        WebRetriever retriever = JsoupRetriever.getInstance(document);
+        WebRetriever retriever = new JsoupRetriever(document);
         return new WordAnalyzer(retriever.mappingBody(), PatternHolder.accessiblePattern);
     }
 

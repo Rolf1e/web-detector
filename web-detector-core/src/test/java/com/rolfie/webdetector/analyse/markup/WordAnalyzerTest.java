@@ -13,7 +13,7 @@ public class WordAnalyzerTest {
     @Test
     public void should_get_accessibilite_with_accent() {
         Session session = MockComponent.mockSessionWithAccessibiliteWithAccent();
-        WebRetriever pageRetriever = WebFolderRetriever.getInstance(session);
+        WebRetriever pageRetriever = new WebFolderRetriever(session);
         TextAnalyzer analyzer = new WordAnalyzer(pageRetriever.mappingBody(), PatternHolder.accessiblePattern);
 
         analyzer.found();
@@ -23,7 +23,7 @@ public class WordAnalyzerTest {
     @Test
     public void should_get_accessibilite_without_accent() {
         Session session = MockComponent.mockSessionWithAccessibilite();
-        WebRetriever pageRetriever = WebFolderRetriever.getInstance(session);
+        WebRetriever pageRetriever = new WebFolderRetriever(session);
         TextAnalyzer analyzer = new WordAnalyzer(pageRetriever.mappingBody(), PatternHolder.accessiblePattern);
 
         analyzer.found();

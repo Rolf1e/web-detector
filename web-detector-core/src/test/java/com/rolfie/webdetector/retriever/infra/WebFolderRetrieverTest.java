@@ -35,7 +35,7 @@ public class WebFolderRetrieverTest {
                 .map(Line::create)
                 .collect(Collectors.toList());
 
-        WebRetriever webFolderRetriever = WebFolderRetriever.getInstance(session);
+        WebRetriever webFolderRetriever = new WebFolderRetriever(session);
         final Map<LineNumber, Line> integerElementMap = webFolderRetriever.mappingBody();
 
         for (Map.Entry<LineNumber, Line> entry : integerElementMap.entrySet()) {
@@ -59,7 +59,7 @@ public class WebFolderRetrieverTest {
                 .map(Line::create)
                 .collect(Collectors.toList());
 
-        WebRetriever webFolderRetriever = WebFolderRetriever.getInstance(session);
+        WebRetriever webFolderRetriever = new WebFolderRetriever(session);
         final Map<LineNumber, Line> integerElementMap = webFolderRetriever.mappingHead();
 
         for (Map.Entry<LineNumber, Line> entry : integerElementMap.entrySet()) {

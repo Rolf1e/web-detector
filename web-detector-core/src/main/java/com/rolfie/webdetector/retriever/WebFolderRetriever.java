@@ -9,18 +9,9 @@ import java.util.Map;
 
 public class WebFolderRetriever implements WebRetriever {
 
-    private static WebRetriever instance = null;
-
     private final Session session;
 
-    public static WebRetriever getInstance(Session session) {
-        if (instance == null) {
-            instance = new WebFolderRetriever(session);
-        }
-        return instance;
-    }
-
-    private WebFolderRetriever(Session session) {
+    public WebFolderRetriever(Session session) {
         this.session = session;
     }
 
@@ -44,7 +35,6 @@ public class WebFolderRetriever implements WebRetriever {
 
         return mappedWebSite;
     }
-
 
     private String retrieveHtmlContent(String htmlMarkUp) {
         return session.getOuterHtml(htmlMarkUp);

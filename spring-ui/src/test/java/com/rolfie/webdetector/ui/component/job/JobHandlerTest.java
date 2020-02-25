@@ -1,5 +1,6 @@
 package com.rolfie.webdetector.ui.component.job;
 
+import com.rolfie.webdetector.ui.dto.Job;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -12,19 +12,10 @@ import java.util.Map;
 
 public class JsoupRetriever implements WebRetriever {
 
-    private static WebRetriever instance = null;
-
     private Document document;
     private Integer lineCount;
 
-    public static WebRetriever getInstance(Document document) {
-        if (instance == null) {
-            instance = new JsoupRetriever(document);
-        }
-        return instance;
-    }
-
-    private JsoupRetriever(Document document) {
+    public JsoupRetriever(Document document) {
         this.document = document;
     }
 
