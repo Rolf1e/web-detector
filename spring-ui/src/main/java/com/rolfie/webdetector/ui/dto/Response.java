@@ -13,5 +13,6 @@ public class Response {
 
     private String uri;
     private List<Line> alts;
+    private List<Line> accessibilite;
 
 }

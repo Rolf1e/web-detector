@@ -1,12 +1,8 @@
 package com.rolfie.webdetector.ui.component.job;
 
-import com.rolfie.webdetector.component.AnalyzerHandler;
-import com.rolfie.webdetector.retriever.infra.UrlHolder;
-import com.rolfie.webdetector.ui.component.response.json.AltResponse;
-import com.rolfie.webdetector.ui.component.response.json.JsonResponse;
+import com.rolfie.webdetector.ui.dto.Job;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,24 +27,5 @@ public class JobHandler {
         }
 
         return toDo;
-    }
-
-    private JsonResponse jobResolver(Job job) {
-        AnalyzerHandler analyzerHandler = new AnalyzerHandler(UrlHolder.getInstance().getUrl());
-        switch (job.getName()) {
-            case "alt":
-                return getAltResponse(analyzerHandler);
-            default:
-                throw new IllegalStateException("No job selected");
-        }
-    }
-
-    private JsonResponse getAltResponse(AnalyzerHandler analyzerHandler) {
-        try {
-            return new AltResponse(analyzerHandler.imgAnalyze());
-        } catch (IOException e) {
-            log.error("Can not get Data for alt job ", e);
-            return null;
-        }
     }
 }

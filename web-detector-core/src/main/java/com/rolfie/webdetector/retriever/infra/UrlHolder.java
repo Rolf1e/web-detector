@@ -14,16 +14,10 @@ public class UrlHolder {
     }
 
     public static UrlHolder getInstance(String url) {
-        if (instance == null) {
-            instance = new UrlHolder(url);
-        }
-        return instance;
+        return instance = new UrlHolder(url);
     }
 
     public static UrlHolder getInstance() {
-        if (instance == null) {
-            throw new IllegalStateException("Not already instancied");
-        }
         return instance;
     }
 }

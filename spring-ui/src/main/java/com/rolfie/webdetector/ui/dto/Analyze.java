@@ -1,6 +1,5 @@
 package com.rolfie.webdetector.ui.dto;
 
-import com.rolfie.webdetector.ui.component.job.Job;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
