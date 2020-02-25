@@ -27,32 +27,32 @@ public class AnalyzerHandler {
         this.url = url;
     }
 
-    public Map<LineNumber, HtmlLine> imageAnalyze() throws IOException {
+    public Map<LineNumber, HtmlLine> getImageAnalyzes() throws IOException {
         log.info("Start image analyze");
 
-        Document document = getDocument();
-        TextAnalyzer analyzer = imageAnalyze(document);
+        TextAnalyzer analyzer = imageAnalyze();
         return analyzer.found();
     }
 
-    public Map<LineNumber, HtmlLine> accessibiliteWordAnalyze() throws IOException {
+    public Map<LineNumber, HtmlLine> getAccessibiliteWordAnalyzes() throws IOException {
         log.info("Start accessibilite word analyze");
-
-        Document document = getDocument();
-        TextAnalyzer analyzer = accessibiliteWordAnalyze(document);
+        TextAnalyzer analyzer = accessibiliteWordAnalyze();
         return analyzer.found();
     }
 
-    private TextAnalyzer imageAnalyze(Document document) {
-        WebRetriever retriever = new JsoupRetriever(document);
+    private TextAnalyzer imageAnalyze() throws IOException {
+        WebRetriever retriever = getJsoupRetriever();
         return new ImgAnalyzer(retriever.mappingBody());
     }
 
-    private TextAnalyzer accessibiliteWordAnalyze(Document document) throws IOException {
-        WebRetriever retriever = new JsoupRetriever(document);
+    private TextAnalyzer accessibiliteWordAnalyze() throws IOException {
+        WebRetriever retriever = getJsoupRetriever();
         return new WordAnalyzer(retriever.mappingBody(), PatternHolder.accessiblePattern);
     }
 
+    private WebRetriever getJsoupRetriever() throws IOException {
+        return new JsoupRetriever(getDocument());
+    }
 
     private SessionFactory sessionFactory(Launcher launcher) {
         return launcher.launch();

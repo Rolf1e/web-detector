@@ -46,10 +46,12 @@ public class ImgAnalyzer implements TextAnalyzer {
                 final LineNumber key = entry.getKey();
                 badElements.put(key, Link.extractLink(value));
                 countErrors++;
-                log.info("One element is badly coded line :" + key.getNumber());
+                if (log.isDebugEnabled()) {
+                    log.debug("One element is badly coded line :" + key.getNumber());
+                }
             }
         }
-
+        log.info("{} elements have bad alt markup", countErrors);
         return badElements;
     }
 

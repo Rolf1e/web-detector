@@ -50,7 +50,7 @@ public class FinalResponse {
 
     private List<Line> getAlts() {
         try {
-            return new AltResponse(analyzerHandler.imageAnalyze())
+            return new AltResponse(analyzerHandler.getImageAnalyzes())
                     .getJson();
         } catch (IOException e) {
             log.error("Can not get Data for alt job ", e);
@@ -60,7 +60,7 @@ public class FinalResponse {
 
     private List<Line> getAccessibiliteWord() {
         try {
-            return new WordResponse(analyzerHandler.accessibiliteWordAnalyze(), "accessibilite")
+            return new WordResponse(analyzerHandler.getAccessibiliteWordAnalyzes(), "accessibilite")
                     .getJson();
         } catch (IOException e) {
             log.error("Can not get Data for accessibilite word job", e);
