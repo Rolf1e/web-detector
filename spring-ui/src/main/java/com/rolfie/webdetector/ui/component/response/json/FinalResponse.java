@@ -25,7 +25,7 @@ public class FinalResponse {
 
     public Response getJson() {
         response.setUri(getUri());
-        for(Job job : jobs) {
+        for (Job job : jobs) {
             jobResolver(job);
         }
         return response;
@@ -40,6 +40,9 @@ public class FinalResponse {
             case "alt":
                 response.setAlts(getAlts());
                 break;
+            case "accessibilite":
+                response.setAccessibilite(getAccessibiliteWord());
+                break;
             default:
                 throw new IllegalStateException("No job selected");
         }
@@ -47,10 +50,20 @@ public class FinalResponse {
 
     private List<Line> getAlts() {
         try {
-            return new AltResponse(analyzerHandler.imgAnalyze())
+            return new AltResponse(analyzerHandler.imageAnalyze())
                     .getJson();
         } catch (IOException e) {
             log.error("Can not get Data for alt job ", e);
+            return null;
+        }
+    }
+
+    private List<Line> getAccessibiliteWord() {
+        try {
+            return new WordResponse(analyzerHandler.accessibiliteWordAnalyze(), "accessibilite")
+                    .getJson();
+        } catch (IOException e) {
+            log.error("Can not get Data for accessibilite word job", e);
             return null;
         }
     }

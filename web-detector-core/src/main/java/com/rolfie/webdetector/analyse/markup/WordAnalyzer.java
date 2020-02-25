@@ -8,24 +8,27 @@ import com.rolfie.webdetector.retriever.infra.html.LineNumber;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AccessibleAnalyzer implements TextAnalyzer {
-
-    private static String accessiblePattern = "accessibilit[eé]";
+public class WordAnalyzer implements TextAnalyzer {
 
     private final Map<LineNumber, Line> webPage;
     private int countErrors;
+    private String word;
 
-    public AccessibleAnalyzer(Map<LineNumber, Line> webPage) {
+    public WordAnalyzer(Map<LineNumber, Line> webPage,
+                        String word) {
+
         this.webPage = webPage;
+        this.word = word;
     }
 
     @Override
     public Map<LineNumber, HtmlLine> found() {
         Map<LineNumber, HtmlLine> accessibleLine = new HashMap<>();
-        PatternResolver resolver = new PatternResolver(accessiblePattern);
+
         webPage.forEach((key, currentMarkup) -> {
-            if (resolver.regexResolve(currentMarkup.getValue())) {
+            if (PatternResolver.seek(currentMarkup.getValue(), word)) {
                 accessibleLine.put(key, Line.create(currentMarkup.getValue()));
+                countErrors++;
             }
         });
         return accessibleLine;
@@ -33,6 +36,6 @@ public class AccessibleAnalyzer implements TextAnalyzer {
 
     @Override
     public int numberFound() {
-        return 0;
+        return countErrors;
     }
 }

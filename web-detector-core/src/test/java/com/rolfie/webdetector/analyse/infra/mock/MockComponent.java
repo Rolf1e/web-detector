@@ -56,4 +56,29 @@ public class MockComponent {
         return mock;
     }
 
+    public static Session mockSessionWithAccessibilite() {
+        Session mock = Mockito.mock(Session.class);
+
+        when(mock.getOuterHtml("body")).thenReturn(
+                "<body>\n" +
+                        "<p>accessibilite</p>" +
+                        "<p>Accessibilite</div>" +
+                        "</body>"
+        );
+
+        return mock;
+    }
+
+    public static Session mockSessionWithAccessibiliteWithAccent() {
+        Session mock = Mockito.mock(Session.class);
+
+        when(mock.getOuterHtml("body")).thenReturn(
+                "<body>\n" +
+                        "<p>accessibilité</p>" +
+                        "<div>Accessibilité</div>" +
+                        "</body>"
+        );
+
+        return mock;
+    }
 }
