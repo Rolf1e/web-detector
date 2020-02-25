@@ -1,4 +1,4 @@
-package com.rolfie.webdetector.retriever.infra;
+package com.rolfie.webdetector.ui.mappings;
 
 import lombok.Getter;
 
@@ -13,7 +13,7 @@ public class UrlHolder {
         this.url = url;
     }
 
-    public static UrlHolder getInstance(String url) {
+    static UrlHolder getInstance(String url) {
         return instance = new UrlHolder(url);
     }
 
