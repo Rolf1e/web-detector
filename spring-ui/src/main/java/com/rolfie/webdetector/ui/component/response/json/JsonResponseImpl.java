@@ -33,7 +33,7 @@ public abstract class JsonResponseImpl implements JsonResponse {
     protected List<Line> getJsonBody() {
         List<Line> body = new ArrayList<>();
 
-        for(String[] column : data) {
+        for (String[] column : data) {
             body.add(create(column[0], column[1]));
         }
 
@@ -43,7 +43,7 @@ public abstract class JsonResponseImpl implements JsonResponse {
     private Line create(String number,
                         String url) {
 
-        return new Line(number, url);
+        return new Line(number, escapeCharacters(url));
     }
 
     private String escapeCharacters(String toEscape) {
@@ -59,6 +59,7 @@ public abstract class JsonResponseImpl implements JsonResponse {
     private String escape(char c) {
         switch (c) {
             case '"':
+            case '\'':
                 return "";
             default:
                 return String.valueOf(c);
@@ -66,17 +67,17 @@ public abstract class JsonResponseImpl implements JsonResponse {
     }
 
     private String[][] getDataFromMap(Map<LineNumber, HtmlLine> oldDataFormat) {
-        String[][] data = new String[oldDataFormat.size()][2];
-
+        String[][] unMappedData = new String[oldDataFormat.size()][2];
         int indice = 0;
-        for (LineNumber element : oldDataFormat.keySet()) {
-            data[indice][0] = element.getNumber();
-            final HtmlLine link = oldDataFormat
-                    .get(element);
-            data[indice][1] = link.getValue();
+
+        for(Map.Entry<LineNumber, HtmlLine> entry : oldDataFormat.entrySet()) {
+            LineNumber line = entry.getKey();
+            HtmlLine link = entry.getValue();
+            unMappedData[indice][0] = line.getNumber();
+            unMappedData[indice][1] = link.getValue();
             indice++;
         }
 
-        return data;
+        return unMappedData;
     }
 }

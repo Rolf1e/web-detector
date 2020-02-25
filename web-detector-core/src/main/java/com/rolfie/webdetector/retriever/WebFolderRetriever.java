@@ -7,6 +7,9 @@ import io.webfolder.cdp.session.Session;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.rolfie.webdetector.retriever.WebRetriever.MarkUp.BODY_MARK_UP;
+import static com.rolfie.webdetector.retriever.WebRetriever.MarkUp.HEAD_MARK_UP;
+
 public class WebFolderRetriever implements WebRetriever {
 
     private final Session session;
@@ -17,12 +20,12 @@ public class WebFolderRetriever implements WebRetriever {
 
     @Override
     public Map<LineNumber, Line> mappingBody() {
-        return mappingContent(retrieveHtmlContent(bodyMarkUp));
+        return mappingContent(retrieveHtmlContent(BODY_MARK_UP));
     }
 
     @Override
     public Map<LineNumber, Line> mappingHead() {
-        return mappingContent(retrieveHtmlContent(headMarkUp));
+        return mappingContent(retrieveHtmlContent(HEAD_MARK_UP));
     }
 
     private Map<LineNumber, Line> mappingContent(String toMap) {

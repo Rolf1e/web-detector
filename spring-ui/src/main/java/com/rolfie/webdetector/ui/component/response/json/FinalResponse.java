@@ -8,6 +8,8 @@ import com.rolfie.webdetector.ui.dto.Response;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -54,8 +56,11 @@ public class FinalResponse {
                     .getJson();
         } catch (IOException e) {
             log.error("Can not get Data for alt job ", e);
-            return null;
+            return Collections.emptyList();
+        } catch (GeneralSecurityException e) {
+            log.error("Error with SSL Certificates");
         }
+        return Collections.emptyList();
     }
 
     private List<Line> getAccessibiliteWord() {
@@ -64,7 +69,10 @@ public class FinalResponse {
                     .getJson();
         } catch (IOException e) {
             log.error("Can not get Data for accessibilite word job", e);
-            return null;
+        } catch (GeneralSecurityException e) {
+            log.error("Error with SSL Certificates");
         }
+        return Collections.emptyList();
+
     }
 }

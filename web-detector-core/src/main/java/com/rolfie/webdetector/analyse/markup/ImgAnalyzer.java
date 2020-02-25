@@ -10,13 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.rolfie.webdetector.analyse.infra.pattern.regex.PatternHolder.*;
+
 @Slf4j
 public class ImgAnalyzer implements TextAnalyzer {
 
-    private static final String patternWithEmptyAlt = "[\\s.]*<img.*alt=\"\".*>[\\s.]*";
-    private static final String patternAlt = " alt=\"";
 
-    private static final String imgPattern = "[\\s\\w.]*<img.*>[\\s\\w.]*";
 
     private final Map<LineNumber, Line> webPage;
     private int countErrors;
@@ -33,7 +32,7 @@ public class ImgAnalyzer implements TextAnalyzer {
     @Override
     public Map<LineNumber, HtmlLine> found() {
         Map<LineNumber, HtmlLine> badElements = new HashMap<>();
-        PatternResolver resolver = new PatternResolver(patternWithEmptyAlt);
+        PatternResolver resolver = new PatternResolver(PATTERN_WITH_EMPTY_ALT.getPattern());
 
         for (Map.Entry<LineNumber, Line> entry : getOnlyImg().entrySet()) {
 
@@ -41,7 +40,7 @@ public class ImgAnalyzer implements TextAnalyzer {
 
             final String value = currentElement.getValue();
             if (resolver.regexResolve(value)
-                    || !PatternResolver.seek(value, patternAlt)) {
+                    || !PatternResolver.seek(value, PATTERN_ALT.getPattern())) {
 
                 final LineNumber key = entry.getKey();
                 badElements.put(key, Link.extractLink(value));
@@ -57,7 +56,7 @@ public class ImgAnalyzer implements TextAnalyzer {
 
     private Map<LineNumber, Line> getOnlyImg() {
         Map<LineNumber, Line> onlyImg = new HashMap<>();
-        PatternResolver resolver = new PatternResolver(imgPattern);
+        PatternResolver resolver = new PatternResolver(IMG_PATTERN.getPattern());
 
         webPage.forEach((key, currentMarkup) -> {
             if (resolver.regexResolve(currentMarkup.getValue())) {

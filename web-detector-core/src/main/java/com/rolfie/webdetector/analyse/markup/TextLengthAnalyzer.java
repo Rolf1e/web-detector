@@ -7,9 +7,6 @@ import java.util.Map;
 
 public class TextLengthAnalyzer implements TextAnalyzer {
 
-    private final static String pPattern = "[\\s.]*<img.*>[\\s.]*</p>[\\s.]*";
-
-
     @Override
     public Map<LineNumber, HtmlLine> found() {
         return null;

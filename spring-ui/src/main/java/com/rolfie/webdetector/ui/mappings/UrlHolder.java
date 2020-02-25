@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class UrlHolder {
 
-    public static UrlHolder instance = null;
+    private static UrlHolder instance = null;
 
     private final String url;
 
@@ -14,7 +14,8 @@ public class UrlHolder {
     }
 
     static UrlHolder getInstance(String url) {
-        return instance = new UrlHolder(url);
+         instance = new UrlHolder(url);
+         return instance;
     }
 
     public static UrlHolder getInstance() {

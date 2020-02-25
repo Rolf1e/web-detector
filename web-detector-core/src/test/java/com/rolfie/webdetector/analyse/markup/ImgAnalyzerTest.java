@@ -31,7 +31,7 @@ public class ImgAnalyzerTest {
 
         TextAnalyzer analyzer = new ImgAnalyzer(pageRetriever.mappingBody());
         analyzer.found();
-        Assert.assertEquals(2, analyzer.numberFound());
+        Assert.assertEquals(3, analyzer.numberFound());
     }
 
 }

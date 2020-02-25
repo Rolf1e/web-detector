@@ -1,6 +1,5 @@
 package com.rolfie.webdetector.component;
 
-import com.rolfie.webdetector.analyse.infra.pattern.regex.PatternHolder;
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.analyse.markup.TextAnalyzer;
 import com.rolfie.webdetector.analyse.markup.WordAnalyzer;
@@ -16,7 +15,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.Map;
+
+import static com.rolfie.webdetector.analyse.infra.pattern.regex.PatternHolder.ACCESSIBLE_PATTERN;
 
 @Slf4j
 public class AnalyzerHandler {
@@ -27,30 +29,30 @@ public class AnalyzerHandler {
         this.url = url;
     }
 
-    public Map<LineNumber, HtmlLine> getImageAnalyzes() throws IOException {
+    public Map<LineNumber, HtmlLine> getImageAnalyzes() throws IOException, GeneralSecurityException {
         log.info("Start image analyze");
 
         TextAnalyzer analyzer = imageAnalyze();
         return analyzer.found();
     }
 
-    public Map<LineNumber, HtmlLine> getAccessibiliteWordAnalyzes() throws IOException {
+    public Map<LineNumber, HtmlLine> getAccessibiliteWordAnalyzes() throws IOException, GeneralSecurityException {
         log.info("Start accessibilite word analyze");
         TextAnalyzer analyzer = accessibiliteWordAnalyze();
         return analyzer.found();
     }
 
-    private TextAnalyzer imageAnalyze() throws IOException {
+    private TextAnalyzer imageAnalyze() throws IOException, GeneralSecurityException {
         WebRetriever retriever = getJsoupRetriever();
         return new ImgAnalyzer(retriever.mappingBody());
     }
 
-    private TextAnalyzer accessibiliteWordAnalyze() throws IOException {
+    private TextAnalyzer accessibiliteWordAnalyze() throws IOException, GeneralSecurityException {
         WebRetriever retriever = getJsoupRetriever();
-        return new WordAnalyzer(retriever.mappingBody(), PatternHolder.accessiblePattern);
+        return new WordAnalyzer(retriever.mappingBody(), ACCESSIBLE_PATTERN.getPattern());
     }
 
-    private WebRetriever getJsoupRetriever() throws IOException {
+    private WebRetriever getJsoupRetriever() throws IOException, GeneralSecurityException {
         return new JsoupRetriever(getDocument());
     }
 
@@ -62,9 +64,9 @@ public class AnalyzerHandler {
         return new Launcher();
     }
 
-    private Document getDocument() throws IOException {
+    private Document getDocument() throws IOException, GeneralSecurityException {
         return Jsoup.connect(url)
-                .sslSocketFactory(CacertsUtils.JsoupSocketFactory())
+                .sslSocketFactory(CacertsUtils.jsoupSocketFactory())
                 .get();
     }
 }

@@ -7,8 +7,15 @@ import java.util.Map;
 
 public interface WebRetriever {
 
-    String bodyMarkUp = "body";
-    String headMarkUp = "head";
+   class MarkUp {
+       public static final String BODY_MARK_UP = "body";
+       public static final String HEAD_MARK_UP = "head";
+
+       private MarkUp() {
+
+       }
+   }
+
 
     Map<LineNumber, Line> mappingBody();
 

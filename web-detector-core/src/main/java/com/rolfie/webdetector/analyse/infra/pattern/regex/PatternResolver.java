@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class PatternResolver {
 
     private final String pattern;
-    private Boolean caseSensitive;
+    private boolean caseSensitive;
 
     public PatternResolver(String pattern) {
         this.pattern = pattern;
