@@ -1,5 +1,7 @@
 package com.rolfie.webdetector.retriever.infra.cacerts;
 
+import lombok.experimental.UtilityClass;
+
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
@@ -10,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
+@UtilityClass
 public class CacertsUtils {
 
     public static SSLSocketFactory jsoupSocketFactory() throws GeneralSecurityException {
@@ -38,9 +41,4 @@ public class CacertsUtils {
             throw new GeneralSecurityException("Failed to create a SSL socket factory", e);
         }
     }
-
-    private CacertsUtils() {
-
-    }
-
 }

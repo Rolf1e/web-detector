@@ -10,7 +10,7 @@ public class Link implements HtmlLine {
     @Getter
     private String value;
 
-    public Link(String value) {
+    private Link(String value) {
         this.value = value;
     }
 
