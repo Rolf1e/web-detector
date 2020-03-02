@@ -51,27 +51,12 @@ public class FinalResponse {
     }
 
     private List<Line> getAlts() {
-        try {
-            return new AltResponse(analyzerHandler.getImageAnalyzes())
-                    .getJson();
-        } catch (IOException e) {
-            log.error("Can not get Data for alt job ", e);
-        } catch (GeneralSecurityException e) {
-            log.error("Error with SSL Certificates");
-        }
-        return Collections.emptyList();
+        return new AltResponse(analyzerHandler.getImageAnalyzes())
+                .getJson();
     }
 
     private List<Line> getAccessibiliteWord() {
-        try {
-            return new WordResponse(analyzerHandler.getAccessibiliteWordAnalyzes(), "accessibilite")
-                    .getJson();
-        } catch (IOException e) {
-            log.error("Can not get Data for accessibilite word job", e);
-        } catch (GeneralSecurityException e) {
-            log.error("Error with SSL Certificates");
-        }
-        return Collections.emptyList();
-
+        return new WordResponse(analyzerHandler.getAccessibiliteWordAnalyzes(), "accessibilite")
+                .getJson();
     }
 }

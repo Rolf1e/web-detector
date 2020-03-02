@@ -7,6 +7,9 @@ import java.util.Map;
 
 public class TextLengthAnalyzer implements TextAnalyzer {
 
+
+
+
     @Override
     public Map<LineNumber, HtmlLine> found() {
         return null;

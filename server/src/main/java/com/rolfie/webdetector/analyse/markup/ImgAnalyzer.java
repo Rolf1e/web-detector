@@ -15,8 +15,6 @@ import static com.rolfie.webdetector.analyse.infra.pattern.regex.PatternHolder.*
 @Slf4j
 public class ImgAnalyzer implements TextAnalyzer {
 
-
-
     private final Map<LineNumber, Line> webPage;
     private int countErrors;
 

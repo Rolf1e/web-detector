@@ -31,26 +31,24 @@ public class AnalyzerHandler {
         retriever = getJsoupRetriever();
     }
 
-    public Map<LineNumber, HtmlLine> getImageAnalyzes() throws IOException, GeneralSecurityException {
+    public Map<LineNumber, HtmlLine> getImageAnalyzes() {
         log.info("Start image analyze");
 
         TextAnalyzer analyzer = imageAnalyze();
         return analyzer.found();
     }
 
-    public Map<LineNumber, HtmlLine> getAccessibiliteWordAnalyzes() throws IOException, GeneralSecurityException {
+    public Map<LineNumber, HtmlLine> getAccessibiliteWordAnalyzes() {
         log.info("Start accessibilite word analyze");
         TextAnalyzer analyzer = accessibiliteWordAnalyze();
         return analyzer.found();
     }
 
-    private TextAnalyzer imageAnalyze() throws IOException, GeneralSecurityException {
-//        WebRetriever retriever = getJsoupRetriever();
+    private TextAnalyzer imageAnalyze() {
         return new ImgAnalyzer(retriever.mappingBody());
     }
 
-    private TextAnalyzer accessibiliteWordAnalyze() throws IOException, GeneralSecurityException {
-//        WebRetriever retriever = getJsoupRetriever();
+    private TextAnalyzer accessibiliteWordAnalyze() {
         return new WordAnalyzer(retriever.mappingBody(), ACCESSIBLE_PATTERN.getPattern());
     }
 
