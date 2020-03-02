@@ -1,8 +1,8 @@
-package com.rolfie.webdetector.ui.component.response.json;
+package com.rolfie.webdetector.component.response.json;
 
 import com.rolfie.webdetector.retriever.infra.html.HtmlLine;
 import com.rolfie.webdetector.retriever.infra.html.LineNumber;
-import com.rolfie.webdetector.ui.dto.Line;
+import com.rolfie.webdetector.mappings.dto.Line;
 import lombok.Getter;
 
 import java.util.ArrayList;

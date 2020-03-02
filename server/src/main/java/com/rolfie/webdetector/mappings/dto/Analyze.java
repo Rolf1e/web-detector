@@ -1,4 +1,4 @@
-package com.rolfie.webdetector.ui.dto;
+package com.rolfie.webdetector.mappings.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

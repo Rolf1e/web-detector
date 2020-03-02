@@ -1,4 +1,4 @@
-package com.rolfie.webdetector.ui.dto;
+package com.rolfie.webdetector.mappings.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Line {
+public class Job {
 
-    private String number;
-    private String url;
+    private String name;
+    private boolean active;
 }

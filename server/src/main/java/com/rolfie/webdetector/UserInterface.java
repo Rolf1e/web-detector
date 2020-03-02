@@ -1,4 +1,4 @@
-package com.rolfie.webdetector.ui;
+package com.rolfie.webdetector;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package com.rolfie.webdetector.ui.component.job;
+package com.rolfie.webdetector.component.job;
 
-import com.rolfie.webdetector.ui.dto.Job;
+import com.rolfie.webdetector.mappings.dto.Job;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

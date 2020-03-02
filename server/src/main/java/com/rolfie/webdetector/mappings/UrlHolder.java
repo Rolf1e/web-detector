@@ -1,4 +1,4 @@
-package com.rolfie.webdetector.ui.mappings;
+package com.rolfie.webdetector.mappings;
 
 import lombok.Getter;
 

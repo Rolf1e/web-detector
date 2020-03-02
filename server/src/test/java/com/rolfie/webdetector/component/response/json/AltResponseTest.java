@@ -1,4 +1,4 @@
-package com.rolfie.webdetector.ui.component.response.json;
+package com.rolfie.webdetector.component.response.json;
 
 import com.rolfie.webdetector.retriever.infra.html.HtmlLine;
 import com.rolfie.webdetector.retriever.infra.html.Line;
@@ -26,10 +26,10 @@ public class AltResponseTest {
 
     @Test
     public void should_get_json() {
-        final List<com.rolfie.webdetector.ui.dto.Line> expected = Arrays.asList(
-                new com.rolfie.webdetector.ui.dto.Line("1", "test"),
-                new com.rolfie.webdetector.ui.dto.Line("2", "test2"));
-        final List<com.rolfie.webdetector.ui.dto.Line> actual = response.getJson();
+        final List<com.rolfie.webdetector.mappings.dto.Line> expected = Arrays.asList(
+                new com.rolfie.webdetector.mappings.dto.Line("1", "test"),
+                new com.rolfie.webdetector.mappings.dto.Line("2", "test2"));
+        final List<com.rolfie.webdetector.mappings.dto.Line> actual = response.getJson();
 
         Assert.assertTrue(expected.containsAll(actual)
                 && actual.containsAll(expected));

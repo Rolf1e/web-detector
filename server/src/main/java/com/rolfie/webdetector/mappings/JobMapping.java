@@ -1,9 +1,9 @@
-package com.rolfie.webdetector.ui.mappings;
+package com.rolfie.webdetector.mappings;
 
-import com.rolfie.webdetector.ui.component.job.JobHandler;
-import com.rolfie.webdetector.ui.component.response.json.FinalResponse;
-import com.rolfie.webdetector.ui.dto.Analyze;
-import com.rolfie.webdetector.ui.dto.Response;
+import com.rolfie.webdetector.component.job.JobHandler;
+import com.rolfie.webdetector.component.response.json.FinalResponse;
+import com.rolfie.webdetector.mappings.dto.Analyze;
+import com.rolfie.webdetector.mappings.dto.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

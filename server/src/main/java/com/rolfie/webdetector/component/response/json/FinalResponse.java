@@ -1,10 +1,10 @@
-package com.rolfie.webdetector.ui.component.response.json;
+package com.rolfie.webdetector.component.response.json;
 
 import com.rolfie.webdetector.analyse.AnalyzerHandler;
-import com.rolfie.webdetector.ui.mappings.UrlHolder;
-import com.rolfie.webdetector.ui.dto.Job;
-import com.rolfie.webdetector.ui.dto.Line;
-import com.rolfie.webdetector.ui.dto.Response;
+import com.rolfie.webdetector.mappings.UrlHolder;
+import com.rolfie.webdetector.mappings.dto.Job;
+import com.rolfie.webdetector.mappings.dto.Line;
+import com.rolfie.webdetector.mappings.dto.Response;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
