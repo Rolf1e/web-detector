@@ -1,6 +1,6 @@
 package com.rolfie.webdetector.ui.component.response.json;
 
-import com.rolfie.webdetector.component.AnalyzerHandler;
+import com.rolfie.webdetector.analyse.AnalyzerHandler;
 import com.rolfie.webdetector.ui.mappings.UrlHolder;
 import com.rolfie.webdetector.ui.dto.Job;
 import com.rolfie.webdetector.ui.dto.Line;

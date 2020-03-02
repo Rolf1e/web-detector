@@ -1,4 +1,4 @@
-package com.rolfie.webdetector.component;
+package com.rolfie.webdetector.analyse;
 
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.analyse.markup.TextAnalyzer;
