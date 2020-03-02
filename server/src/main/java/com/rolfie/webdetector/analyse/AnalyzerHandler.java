@@ -24,9 +24,11 @@ import static com.rolfie.webdetector.analyse.infra.pattern.regex.PatternHolder.A
 public class AnalyzerHandler {
 
     private final String url;
+    private WebRetriever retriever;
 
-    public AnalyzerHandler(String url) {
+    public AnalyzerHandler(String url) throws IOException, GeneralSecurityException {
         this.url = url;
+        retriever = getJsoupRetriever();
     }
 
     public Map<LineNumber, HtmlLine> getImageAnalyzes() throws IOException, GeneralSecurityException {
@@ -43,12 +45,12 @@ public class AnalyzerHandler {
     }
 
     private TextAnalyzer imageAnalyze() throws IOException, GeneralSecurityException {
-        WebRetriever retriever = getJsoupRetriever();
+//        WebRetriever retriever = getJsoupRetriever();
         return new ImgAnalyzer(retriever.mappingBody());
     }
 
     private TextAnalyzer accessibiliteWordAnalyze() throws IOException, GeneralSecurityException {
-        WebRetriever retriever = getJsoupRetriever();
+//        WebRetriever retriever = getJsoupRetriever();
         return new WordAnalyzer(retriever.mappingBody(), ACCESSIBLE_PATTERN.getPattern());
     }
 

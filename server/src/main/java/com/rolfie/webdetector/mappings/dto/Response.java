@@ -11,8 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Response {
 
-    private String uri;
-    private List<Line> alts;
-    private List<Line> accessibilite;
+    protected String uri;
+    protected List<Line> alts;
+    protected List<Line> accessibilite;
 
 }

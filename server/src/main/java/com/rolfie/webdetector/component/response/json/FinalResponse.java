@@ -19,7 +19,7 @@ public class FinalResponse {
     private Response response;
     private List<Job> jobs;
 
-    public FinalResponse(List<Job> jobs) {
+    public FinalResponse(List<Job> jobs) throws IOException, GeneralSecurityException {
         analyzerHandler = new AnalyzerHandler(getUri());
         response = new Response();
         this.jobs = jobs;
@@ -56,7 +56,6 @@ public class FinalResponse {
                     .getJson();
         } catch (IOException e) {
             log.error("Can not get Data for alt job ", e);
-            return Collections.emptyList();
         } catch (GeneralSecurityException e) {
             log.error("Error with SSL Certificates");
         }

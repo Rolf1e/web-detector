@@ -45,9 +45,7 @@ public class ImgAnalyzer implements TextAnalyzer {
                 final LineNumber key = entry.getKey();
                 badElements.put(key, Link.extractLink(value));
                 countErrors++;
-                if (log.isDebugEnabled()) {
-                    log.debug("One element is badly coded line :" + key.getNumber());
-                }
+                log.debug("One element is badly coded line :" + key.getNumber());
             }
         }
         log.info("{} elements have bad alt markup", countErrors);
@@ -58,11 +56,13 @@ public class ImgAnalyzer implements TextAnalyzer {
         Map<LineNumber, Line> onlyImg = new HashMap<>();
         PatternResolver resolver = new PatternResolver(IMG_PATTERN.getPattern());
 
-        webPage.forEach((key, currentMarkup) -> {
+        for (Map.Entry<LineNumber, Line> entry : webPage.entrySet()) {
+            LineNumber key = entry.getKey();
+            Line currentMarkup = entry.getValue();
             if (resolver.regexResolve(currentMarkup.getValue())) {
                 onlyImg.put(key, Line.create(currentMarkup.getValue()));
             }
-        });
+        }
 
         return onlyImg;
     }

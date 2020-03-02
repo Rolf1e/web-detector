@@ -27,12 +27,14 @@ public class WordAnalyzer implements TextAnalyzer {
     public Map<LineNumber, HtmlLine> found() {
         Map<LineNumber, HtmlLine> accessibleLine = new HashMap<>();
 
-        webPage.forEach((key, currentMarkup) -> {
+        for (Map.Entry<LineNumber, Line> entry : webPage.entrySet()) {
+            LineNumber key = entry.getKey();
+            Line currentMarkup = entry.getValue();
             if (PatternResolver.seek(currentMarkup.getValue(), word)) {
                 accessibleLine.put(key, Line.create(currentMarkup.getValue()));
                 wordCount++;
             }
-        });
+        }
         log.info("{} elements contain {}", wordCount, word);
         return accessibleLine;
     }
