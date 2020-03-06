@@ -10,7 +10,9 @@ public enum PatternHolder {
     PATTERN_ALT(" alt=\""),
     IMG_PATTERN("[\\s\\w.]*<img.*>[\\s\\w.]*"),
 
-    P_PATTERN("[\\s.]*<img.*>[\\s.]*</p>[\\s.]*");
+    P_PATTERN("[\\s.]*<img.*>[\\s.]*</p>[\\s.]*"),
+
+    SENTENCE_PATTERN("\\w*[\\.,;].*");
 
     @Getter
     private String pattern;

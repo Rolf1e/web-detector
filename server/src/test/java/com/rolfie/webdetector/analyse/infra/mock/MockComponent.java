@@ -81,4 +81,33 @@ public class MockComponent {
 
         return mock;
     }
+
+    public static Session mockGoodSessionForTextLength() {
+        Session mock = Mockito.mock(Session.class);
+
+        when(mock.getOuterHtml("body")).thenReturn(
+                "<body>" +
+                        "<h1>Super titre </h1>" +
+                        "<p>Bienvenue sur notre site internet !</p>" +
+                        "<div><p>J'espère que vous y passerez du bon temps.</p></div>" +
+                        "</body>"
+        );
+
+        return mock;
+    }
+
+    public static Session mockBadSessionForTextLength() {
+        Session mock = Mockito.mock(Session.class);
+
+        when(mock.getOuterHtml("body")).thenReturn(
+                "<body>" +
+                        "<h1>Super titre </h1>" +
+                        "<p>Bienvenue sur notre site internet !</p>" +
+                        "<div><p>J'espère que vous y passerez du bon temps j'ai mis beaucoup de temps pour réaliser ce site internet l'aimez vous ?</p></div>" +
+                        "<div><p>J'espère que vous y passerez du bon temps j'ai, mis beaucoup de temps pour réaliser ce ,site internet l'aimez vous, il parle de l'accessibilité des sites internets</p></div>" +
+                        "</body>"
+        );
+
+        return mock;
+    }
 }

@@ -14,7 +14,7 @@ public class WordAnalyzer implements TextAnalyzer {
 
     private final Map<LineNumber, Line> webPage;
     private int wordCount;
-    private String word;
+    private final String word;
 
     public WordAnalyzer(Map<LineNumber, Line> webPage,
                         String word) {
@@ -29,9 +29,9 @@ public class WordAnalyzer implements TextAnalyzer {
 
         for (Map.Entry<LineNumber, Line> entry : webPage.entrySet()) {
             LineNumber key = entry.getKey();
-            Line currentMarkup = entry.getValue();
-            if (PatternResolver.seek(currentMarkup.getValue(), word)) {
-                accessibleLine.put(key, Line.create(currentMarkup.getValue()));
+            final String context = entry.getValue().getContext();
+            if (PatternResolver.seek(context, word)) {
+                accessibleLine.put(key, Line.create(context));
                 wordCount++;
             }
         }

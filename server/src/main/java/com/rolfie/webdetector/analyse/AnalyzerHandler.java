@@ -2,6 +2,7 @@ package com.rolfie.webdetector.analyse;
 
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.analyse.markup.TextAnalyzer;
+import com.rolfie.webdetector.analyse.markup.TextLengthAnalyzer;
 import com.rolfie.webdetector.analyse.markup.WordAnalyzer;
 import com.rolfie.webdetector.retriever.JsoupRetriever;
 import com.rolfie.webdetector.retriever.WebRetriever;
@@ -43,6 +44,17 @@ public class AnalyzerHandler {
         TextAnalyzer analyzer = accessibiliteWordAnalyze();
         return analyzer.found();
     }
+
+    public Map<LineNumber, HtmlLine> getTextLengthAnalyzes() {
+        log.info("Start text length words analyzes");
+        TextAnalyzer analyzer = textLengthAnalyze();
+        return analyzer.found();
+    }
+
+    private TextAnalyzer textLengthAnalyze() {
+        return new TextLengthAnalyzer(retriever.mappingBody());
+    }
+
 
     private TextAnalyzer imageAnalyze() {
         return new ImgAnalyzer(retriever.mappingBody());
