@@ -2,6 +2,7 @@ package com.rolfie.webdetector.analyse;
 
 import com.rolfie.webdetector.analyse.markup.ImgAnalyzer;
 import com.rolfie.webdetector.analyse.markup.TextAnalyzer;
+import com.rolfie.webdetector.analyse.markup.TextLengthAnalyzer;
 import com.rolfie.webdetector.analyse.markup.WordAnalyzer;
 import com.rolfie.webdetector.retriever.JsoupRetriever;
 import com.rolfie.webdetector.retriever.WebRetriever;
@@ -24,31 +25,42 @@ import static com.rolfie.webdetector.analyse.infra.pattern.regex.PatternHolder.A
 public class AnalyzerHandler {
 
     private final String url;
+    private WebRetriever retriever;
 
-    public AnalyzerHandler(String url) {
+    public AnalyzerHandler(String url) throws IOException, GeneralSecurityException {
         this.url = url;
+        retriever = getJsoupRetriever();
     }
 
-    public Map<LineNumber, HtmlLine> getImageAnalyzes() throws IOException, GeneralSecurityException {
+    public Map<LineNumber, HtmlLine> getImageAnalyzes() {
         log.info("Start image analyze");
 
         TextAnalyzer analyzer = imageAnalyze();
         return analyzer.found();
     }
 
-    public Map<LineNumber, HtmlLine> getAccessibiliteWordAnalyzes() throws IOException, GeneralSecurityException {
+    public Map<LineNumber, HtmlLine> getAccessibiliteWordAnalyzes() {
         log.info("Start accessibilite word analyze");
         TextAnalyzer analyzer = accessibiliteWordAnalyze();
         return analyzer.found();
     }
 
-    private TextAnalyzer imageAnalyze() throws IOException, GeneralSecurityException {
-        WebRetriever retriever = getJsoupRetriever();
+    public Map<LineNumber, HtmlLine> getTextLengthAnalyzes() {
+        log.info("Start text length words analyzes");
+        TextAnalyzer analyzer = textLengthAnalyze();
+        return analyzer.found();
+    }
+
+    private TextAnalyzer textLengthAnalyze() {
+        return new TextLengthAnalyzer(retriever.mappingBody());
+    }
+
+
+    private TextAnalyzer imageAnalyze() {
         return new ImgAnalyzer(retriever.mappingBody());
     }
 
-    private TextAnalyzer accessibiliteWordAnalyze() throws IOException, GeneralSecurityException {
-        WebRetriever retriever = getJsoupRetriever();
+    private TextAnalyzer accessibiliteWordAnalyze() {
         return new WordAnalyzer(retriever.mappingBody(), ACCESSIBLE_PATTERN.getPattern());
     }
 

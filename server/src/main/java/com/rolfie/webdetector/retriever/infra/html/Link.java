@@ -8,10 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 public class Link implements HtmlLine {
 
     @Getter
-    private String value;
+    private String context;
 
-    private Link(String value) {
-        this.value = value;
+    private Link(String context) {
+        this.context = context;
     }
 
     public static Link extractLink(String content) {

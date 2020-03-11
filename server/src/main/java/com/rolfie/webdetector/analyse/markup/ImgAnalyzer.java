@@ -15,8 +15,6 @@ import static com.rolfie.webdetector.analyse.infra.pattern.regex.PatternHolder.*
 @Slf4j
 public class ImgAnalyzer implements TextAnalyzer {
 
-
-
     private final Map<LineNumber, Line> webPage;
     private int countErrors;
 
@@ -36,18 +34,16 @@ public class ImgAnalyzer implements TextAnalyzer {
 
         for (Map.Entry<LineNumber, Line> entry : getOnlyImg().entrySet()) {
 
-            final Line currentElement = Line.create(entry.getValue().getValue());
+            final Line currentElement = Line.create(entry.getValue().getContext());
 
-            final String value = currentElement.getValue();
+            final String value = currentElement.getContext();
             if (resolver.regexResolve(value)
                     || !PatternResolver.seek(value, PATTERN_ALT.getPattern())) {
 
                 final LineNumber key = entry.getKey();
                 badElements.put(key, Link.extractLink(value));
                 countErrors++;
-                if (log.isDebugEnabled()) {
-                    log.debug("One element is badly coded line :" + key.getNumber());
-                }
+                log.debug("One element is badly coded line : {}", key.getNumber());
             }
         }
         log.info("{} elements have bad alt markup", countErrors);
@@ -58,14 +54,14 @@ public class ImgAnalyzer implements TextAnalyzer {
         Map<LineNumber, Line> onlyImg = new HashMap<>();
         PatternResolver resolver = new PatternResolver(IMG_PATTERN.getPattern());
 
-        webPage.forEach((key, currentMarkup) -> {
-            if (resolver.regexResolve(currentMarkup.getValue())) {
-                onlyImg.put(key, Line.create(currentMarkup.getValue()));
+        for (Map.Entry<LineNumber, Line> entry : webPage.entrySet()) {
+            LineNumber key = entry.getKey();
+            final String context = entry.getValue().getContext();
+            if (resolver.regexResolve(context)) {
+                onlyImg.put(key, Line.create(context));
             }
-        });
+        }
 
         return onlyImg;
     }
-
-
 }

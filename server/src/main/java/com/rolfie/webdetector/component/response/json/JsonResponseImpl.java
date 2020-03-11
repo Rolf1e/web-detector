@@ -74,7 +74,7 @@ public abstract class JsonResponseImpl implements JsonResponse {
             LineNumber line = entry.getKey();
             HtmlLine link = entry.getValue();
             unMappedData[indice][0] = line.getNumber();
-            unMappedData[indice][1] = link.getValue();
+            unMappedData[indice][1] = link.getContext();
             indice++;
         }
 

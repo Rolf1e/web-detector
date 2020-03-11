@@ -7,10 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Line implements HtmlLine {
 
-    private String value;
+    private String context;
 
-    private Line(String value) {
-        this.value = value;
+    private Line(String context) {
+        this.context = context;
     }
 
     public static Line create(String content) {
