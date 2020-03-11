@@ -16,7 +16,7 @@ public class TextLengthAnalyzerTest {
         TextAnalyzer analyzer = new TextLengthAnalyzer(retriever.mappingBody());
         analyzer.found();
 
-        Assert.assertEquals(2, analyzer.numberFound());
+        Assert.assertEquals(1, analyzer.numberFound());
     }
 
     @Test
